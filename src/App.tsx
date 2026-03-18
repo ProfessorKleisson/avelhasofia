@@ -6,6 +6,7 @@ import { OsHomensDeusesPage } from "./pages/OsHomensDeuses";
 import { MestradoPage } from "./pages/Mestrado";
 import { ArtigoMichelangeloPage } from "./pages/ArtigoMichelangelo";
 import { SobrePage } from "./pages/Sobre";
+import { JogosDigitaisPage } from "./pages/JogosDigitais";
 import { HeaderVelhaSofia } from "./components/HeaderVelhaSofia";
 import { useEffect } from "react";
 
@@ -46,6 +47,7 @@ export default function App() {
           <Route path="/" element={<HomeSofia />} />
           <Route path="/livros/bruxa-das-maquinas" element={<BruxaDasMaquinasPage />} />
           <Route path="/jogos/diarquia" element={<DiarquiaPage />} />
+          <Route path="/jogos/digitais" element={<JogosDigitaisPage />} />
           <Route path="/livros/homens-deuses" element={<OsHomensDeusesPage />} />
           <Route path="/livros/mestrado" element={<MestradoPage />} />
           <Route path="/artigos/michelangelo" element={<ArtigoMichelangeloPage />} />

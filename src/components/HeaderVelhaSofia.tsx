@@ -92,7 +92,8 @@ export function HeaderVelhaSofia() {
                             Jogos <ChevronDown size={12} strokeWidth={3} />
                         </button>
                         <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-56 bg-black/95 backdrop-blur-2xl border border-cyan-500/20 shadow-[0_10px_30px_rgba(0,0,0,0.5)] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all">
-                            <Link to="/jogos/diarquia" className="block px-6 py-4 text-[10px] font-black uppercase tracking-widest hover:bg-cyan-500 hover:text-black transition-all text-white/70">Diarquia</Link>
+                            <Link to="/jogos/digitais" className="block px-6 py-4 text-[10px] font-black uppercase tracking-widest hover:bg-cyan-500 hover:text-black transition-all text-white/70 border-b border-white/5">Jogos Digitais</Link>
+                            <Link to="/jogos/diarquia" className="block px-6 py-4 text-[10px] font-black uppercase tracking-widest hover:bg-cyan-500 hover:text-black transition-all text-white/70">Diarquia (Cardgame)</Link>
                         </div>
                     </div>
 
@@ -152,6 +153,7 @@ export function HeaderVelhaSofia() {
                                 <Link to="/livros/bruxa-das-maquinas" className="block text-xl font-bold hover:text-cyan-400 transition-colors">A Bruxa das Máquinas</Link>
                                 <Link to="/livros/homens-deuses" className="block text-xl font-bold hover:text-cyan-400 transition-colors">Os Homens-Deuses</Link>
                                 <Link to="/livros/mestrado" className="block text-xl font-bold hover:text-[#6366f1] transition-colors">Liberdade em Spinoza</Link>
+                                <Link to="/jogos/digitais" className="block text-xl font-bold hover:text-cyan-400 transition-colors">Jogos Digitais</Link>
                                 <Link to="/jogos/diarquia" className="block text-xl font-bold hover:text-cyan-400 transition-colors">Diarquia Game</Link>
                                 <Link to="/artigos/michelangelo" className="block text-xl font-bold hover:text-amber-500 transition-colors">Artigo: Michelangelo</Link>
                                 <Link to="/sobre" className="block text-xl font-bold hover:text-cyan-400 transition-colors">Sobre o Autor</Link>

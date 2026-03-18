@@ -72,13 +72,22 @@ export function DiarquiaPage() {
                                 <div className="pt-4">
                                     <div className="text-4xl font-black text-charcoal mb-1">R$ 77,99</div>
                                     <div className="text-lg font-bold text-charcoal/60 mb-8 uppercase tracking-widest">Frete Grátis</div>
-                                    <a
-                                        href="https://www.amazon.com.br/Diarquia-Filos%C3%B3fico-Hist%C3%B3rico-Racioc%C3%ADnio-Estrat%C3%A9gico/dp/B0DNNFZG5M"
-                                        target="_blank"
-                                        className="inline-flex items-center gap-3 px-10 py-5 bg-charcoal text-[#FFB701] font-black uppercase text-sm tracking-widest rounded-xl hover:scale-105 transition-transform shadow-2xl"
-                                    >
-                                        Comprar Agora <ChevronRight size={20} />
-                                    </a>
+                                    <div className="flex flex-col sm:flex-row gap-4">
+                                        <a
+                                            href="https://www.amazon.com.br/Diarquia-Filos%C3%B3fico-Hist%C3%B3rico-Racioc%C3%ADnio-Estrat%C3%A9gico/dp/B0DNNFZG5M"
+                                            target="_blank"
+                                            className="inline-flex items-center justify-center gap-3 px-10 py-5 bg-charcoal text-[#FFB701] font-black uppercase text-sm tracking-widest rounded-xl hover:scale-105 transition-transform shadow-2xl"
+                                        >
+                                            Comprar Agora <ChevronRight size={20} />
+                                        </a>
+                                        <a
+                                            href="https://diarquia-cardgame.vercel.app/"
+                                            target="_blank"
+                                            className="inline-flex items-center justify-center gap-3 px-8 py-5 bg-transparent border-2 border-charcoal text-charcoal font-black uppercase text-sm tracking-widest rounded-xl hover:bg-charcoal hover:text-[#FFB701] transition-all shadow-xl"
+                                        >
+                                            Testar Digital
+                                        </a>
+                                    </div>
                                 </div>
                             </motion.div>
                         </div>
