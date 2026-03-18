@@ -81,7 +81,7 @@ export function DiarquiaPage() {
                                             Comprar Agora <ChevronRight size={20} />
                                         </a>
                                         <a
-                                            href="https://diarquia-cardgame.vercel.app/"
+                                            href="https://diarquia-cardgame.onrender.com/"
                                             target="_blank"
                                             className="inline-flex items-center justify-center gap-3 px-8 py-5 bg-transparent border-2 border-charcoal text-charcoal font-black uppercase text-sm tracking-widest rounded-xl hover:bg-charcoal hover:text-[#FFB701] transition-all shadow-xl"
                                         >

@@ -19,7 +19,7 @@ export function JogosDigitaisPage() {
             title: "Diarquia Cardgame",
             description: "A versão digital do aclamado jogo de cartas. Estratégia, filosofia e poder em confrontos rápidos e profundos.",
             image: "/img/MOCKUP COM CARTAS 2 COM MOEDAS sem fundo.png",
-            link: "https://diarquia-cardgame.vercel.app/",
+            link: "https://diarquia-cardgame.onrender.com/",
             color: "from-cyan-500/20 to-blue-500/20",
             borderColor: "border-cyan-500/30",
             hoverColor: "hover:bg-cyan-500",

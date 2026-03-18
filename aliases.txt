@@ -1,0 +1,23 @@
+  source                                                                        url                                                                            age    
+  a-bruxa-das-maquinas-1k81lfduk-professorkleissons-projects.vercel.app         a-bruxa-das-maquinas-navy.vercel.app                                            1d    
+  diarquia-cardgame-kfaugskuq-professorkleissons-projects.vercel.app            diarquia-cardgame.vercel.app                                                    2d    
+  diarquia-cardgame-kfaugskuq-professorkleissons-projects.vercel.app            diarquia-cardgame-professorkleisson-professorkleissons-projects.vercel.app      2d    
+  diarquia-cardgame-kfaugskuq-professorkleissons-projects.vercel.app            diarquia-cardgame-professorkleissons-projects.vercel.app                        2d    
+  registro-chamada-angelina-2vnx71hi1-professorkleissons-projects.vercel.app    registro-chamada-angelina-professorkleissons-projects.vercel.app                4d    
+  registro-chamada-angelina-2vnx71hi1-professorkleissons-projects.vercel.app    registro-chamada-angelina.vercel.app                                            4d    
+  edusync-recorder-bw7nilqfz-professorkleissons-projects.vercel.app             edusync-recorder-professorkleisson-professorkleissons-projects.vercel.app       9d    
+  edusync-recorder-bw7nilqfz-professorkleissons-projects.vercel.app             edusync-recorder-professorkleissons-projects.vercel.app                         9d    
+  edusync-recorder-bw7nilqfz-professorkleissons-projects.vercel.app             edusync-recorder.vercel.app                                                     9d    
+  a-velha-sofia-1x2czv08i-professorkleissons-projects.vercel.app                a-velha-sofia-professorkleissons-projects.vercel.app                           10d    
+  a-velha-sofia-1x2czv08i-professorkleissons-projects.vercel.app                a-velha-sofia-professorkleisson-professorkleissons-projects.vercel.app         10d    
+  a-velha-sofia-1x2czv08i-professorkleissons-projects.vercel.app                avelhasofia.com.br                                                             10d    
+  a-velha-sofia-1x2czv08i-professorkleissons-projects.vercel.app                www.avelhasofia.com.br                                                         10d    
+  a-velha-sofia-1x2czv08i-professorkleissons-projects.vercel.app                a-bruxa-das-maquinas.vercel.app                                                10d    
+  a-bruxa-das-maquinas-1k81lfduk-professorkleissons-projects.vercel.app         a-bruxa-das-maquinas-professorkleissons-projects.vercel.app                    12d    
+  aloca-josp8lkhs-professorkleissons-projects.vercel.app                        aloca-professorkleissons-projects.vercel.app                                   15d    
+  aloca-josp8lkhs-professorkleissons-projects.vercel.app                        aloca-three.vercel.app                                                         15d    
+  aloca-josp8lkhs-professorkleissons-projects.vercel.app                        aloca-professorkleisson-professorkleissons-projects.vercel.app                 15d    
+  citeme-frontend-mllt3x3s1-professorkleissons-projects.vercel.app              citeme-frontend-git-backup-t-39da65-professorkleissons-projects.vercel.app    142d    
+  citeme-frontend-kiibap5l9-professorkleissons-projects.vercel.app              citeme-frontend.vercel.app                                                    152d    
+
+

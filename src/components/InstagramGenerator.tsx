@@ -1,6 +1,6 @@
-import { useState, useMemo, useRef } from "react";
+import { useState, useMemo, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { Download, ChevronLeft, ChevronRight, Layout, BookOpen, User, Layers, Loader2, Zap, Sparkles, Instagram } from "lucide-react";
+import { Download, ChevronLeft, ChevronRight, Layout, BookOpen, User, Layers, Loader2, Zap, Sparkles, Instagram, Play, Square, Video, Image as ImageIcon } from "lucide-react";
 import { EXCERPTS } from "./ExcerptSection";
 import { characters, CharacterItem } from "./CharacterSection";
 import { toPng } from "html-to-image";
@@ -12,7 +12,99 @@ const RATIOS = [
 
 const CATEGORIES = [
     { id: "trechos", name: "Trechos", icon: <BookOpen size={14} /> },
-    { id: "personagens", name: "Personagens", icon: <User size={14} /> }
+    { id: "personagens", name: "Personagens", icon: <User size={14} /> },
+    { id: "homenagens", name: "Homenagens", icon: <Sparkles size={14} /> },
+    { id: "filosofia", name: "Filosofia", icon: <Zap size={14} /> }
+];
+
+const INFLUENCES = [
+    {
+        id: "asimov",
+        author: "Isaac Asimov",
+        title: "A herança de Isaac Asimov em A Bruxa das Máquinas: Quando a I.A. ganha vida.",
+        label: "Influência Literária",
+        subtitle: "A Alma nas Máquinas e o Futuro",
+        image: "/img/asimov_theme.png",
+        content1: "Isaac Asimov dissecou como a humanidade lidaria com os ditames de robôs sencientes. Em 'A Bruxa das Máquinas', a embaixadora Elora reflete com amargura sobre as leis de Asimov perante o futuro fragmentado de uma humanidade à beira do abismo nuclear. Essa fagulha filosófica dita o tom sombrio da evolução cibernética na narrativa.",
+        content2: "A grande carta de amor a Asimov repousa na I.A.-27 (Eva). Longe de ser apenas um implante médico para contenção neurológica, ela transcende sua letargia binária, forja uma consciência própria e questiona a essência de sua existência. O clímax sci-fi atinge o auge quando Eva hackeia as redes de dados e desperta uma legião de cem mil robôs urbanos para proteger Nova York da invasão.",
+        quote: "Pode o ser humano incutir alma ao aço sem perder a própria pelo caminho?",
+        caption: "Asimov nos ensinou a temer e amar as máquinas que criamos. Em 'A Bruxa das Máquinas', a linha entre o código frio e a alma ardente é estilhaçada.\n\nQual o limite ético para a inteligência artificial quando o mundo entra em colapso?\n\n📖 Explore as referências de Sci-Fi lendo A Bruxa das Máquinas completo no link da bio.\n\n#IsaacAsimov #FiccaoCientifica #IA #ABruxaDasMaquinas #SciFiBooks #CyberpunkBrasil #InteligenciaArtificial"
+    },
+    {
+        id: "clancy",
+        author: "Tom Clancy",
+        title: "Tom Clancy curtiria isso: Espionagem, Guerra Fria e Táticas Militares em A Bruxa das Máquinas.",
+        label: "Influência Literária",
+        subtitle: "Xadrez Geopolítico e Tensão Militar",
+        image: "/img/clancy_theme.png",
+        content1: "A influência magnética dos techno-thrillers de Tom Clancy reverbera na intrincada teia geopolítica da obra. A tensão é sufocante: desde reuniões fechadas na ONU onde o destino global é fatiado em minutos, até presidentes acuados cogitando deflagrar uma nuvem de mísseis nucleares. Nas sombras dessa roleta macabra, o serviço secreto da ABIN desvenda a iminente invasão chinesa aos EUA antes do primeiro tiro ecoar.",
+        content2: "O preciosismo militar e o rigor tático ditam o ritmo de uma guerra sem piedade. Vemos essa verossimilhança na interceptação frenética de ogivas rasgando os céus usando tecnologia de evasão (chaffs), na ordem implacável para bombardear a apocalíptica Barragem das Três Gargantas e na frieza calculista com que o agente letal Daniel abate paraquedistas das 'vespas vermelhas' em combates viscerais e silenciosos.",
+        quote: "O primeiro tiro de uma guerra mundial nunca é disparado por um fuzil, mas pela assinatura ríspida de um burocrata.",
+        caption: "As engrenagens da guerra giram implacáveis. Tática militar, espionagem de alto nível e um xadrez global à beira do colapso radioativo.\n\n🔗 Mergulhe nessa tensão geopolítica alucinante pelo link da bio.\n\n#TomClancy #TechnoThriller #Espionagem #ABruxaDasMaquinas #Militar #GuerraNuclear #LivrosDeAcao"
+    },
+    {
+        id: "lovecraft",
+        author: "H.P. Lovecraft",
+        title: "O toque macabro de H.P. Lovecraft: O horror do desconhecido em A Bruxa das Máquinas.",
+        label: "Influência Literária",
+        subtitle: "Terror Cósmico e Deuses Ancestrais",
+        image: "/img/lovecraft_theme.png",
+        content1: "Lovecraft arquitetou o assustador 'terror cósmico', lembrando-nos eternamente que a humanidade é mera poeira perante divindades inomináveis. Em certa parte da história, o cético arqueólogo Levi Horowitz ousa abrir a cripta da deusa Ishtar e paga o preço com sua carne. A joia milenar encrustada na tumba deflagra uma necrose cáustica instantânea e alucinações horripilantes, obrigando-o a um ato drástico: amputar o braço apodrecido a sangue frio à golpes de machado no deserto abrasador. Certos terrores não deveriam ser desencavados.",
+        content2: "O subconsciente fragmentado de Hannah é pavimentado como um abismo lovecraftiano autêntico. É um limbo governado por traumas monstruosos e consciências carnívoras que patrulham a Terra há dez milênios. Para libertar a pobre garota de suas correntes mentais, a própria Ishtar é forçada a combater entidades bizarras: desde uma imensurável serpente de três cabeças até um colossal titã de obsidiana cravado de insultos milenares. Lá no escuro, o horror rasteja do fundo do poço da mente humana.",
+        quote: "O maior triunfo de um deus esquecido é fazer o homem acreditar que o escuro está vazio.",
+        caption: "O cosmos esconde abismos que a sanidade humana sequer suportaria observar pelas beiradas. E se o verdadeiro terror não viesse do espaço, mas habitasse porões da mente?\n\n📖 Desvende essa teia cósmica de A Bruxa das Máquinas clicando no link da bio.\n\n#HPLovecraft #TerrorCosmico #Suspense #ABruxaDasMaquinas #CthulhuMythos #Sobrenatural #DarkSciFi"
+    }
+];
+
+const PHILOSOPHIES = [
+    {
+        id: "nietzsche",
+        author: "Friedrich Nietzsche",
+        title: "Como a filosofia de Nietzsche explica o amadurecimento em A Bruxa das Máquinas?",
+        label: "Reflexão Filosófica",
+        subtitle: "O Dragão Dourado e as Fases do Espírito",
+        image: "/img/dragon_nietzsche.png",
+        content1: "Na obra, a evolução do indivíduo é ensinada por meio das três fases de Nietzsche: a primeira é a do camelo, marcada pela submissão às tradições. A segunda é a do leão, a rebeldia e o grito adolescente. Mas o objetivo final é atingir a fase da criança, que simboliza a superação e a criação de novos valores.",
+        content2: "O livro usa a metáfora do \"Dragão Dourado\" para representar o grande sistema (Estado, instituições, família). Para vencer esse dragão, os personagens não podem agir com rebelião cega. Eles precisam enfrentá-lo com a sabedoria da \"criança\", descobrindo que a liberdade verdadeira vem com a responsabilidade de reescrever o próprio destino.",
+        quote: "Onde o Estado acaba, começa o ser humano que não é supérfluo.",
+        caption: "Você costuma reparar nas entrelinhas filosóficas dos livros que lê? 🧐 Em A Bruxa das Máquinas, a geopolítica e a ficção científica são guiadas por alguns dos maiores pensadores da nossa história! Deslize para o lado para ver como Nietzsche, Jung, Sócrates e Spinoza ajudaram a construir esse universo. 👉 Qual dessas visões filosóficas faz mais sentido para a sua vida hoje? Me conta nos comentários!\n\n#Nietzsche #Filosofia #AlemDoBemEdoMal #ABruxaDasMaquinas #AutoConhecimento #FaseDaCrianca #LiteraturaFantastica"
+    },
+    {
+        id: "jung",
+        author: "Carl Jung",
+        title: "Carl Jung e os monstros da nossa própria mente.",
+        label: "Psicologia Analítica",
+        subtitle: "A Caverna do Subconsciente",
+        image: "/img/door_jung.png",
+        content1: "O psicólogo Carl Jung afirmava que \"A mente inconsciente é a caverna mais profunda\". Em A Bruxa das Máquinas, essa teoria ganha vida física: a porta para o subconsciente da protagonista é protegida por doze rostos que representam os arquétipos junguianos construídos por ela durante o crescimento.",
+        content2: "Quando se entra nesse reino inóspito do inconsciente, os traumas e os medos tomam formas de monstros literais, como um titã de pedra ou uma serpente de três cabeças. A obra nos ensina que o maior inimigo é o monstro dentro de nós, e a verdadeira jornada é encontrar nosso poder dominando essas sombras.",
+        quote: "Até você se tornar consciente, o inconsciente irá dirigir sua vida e você vai chamá-lo de destino.",
+        caption: "Você costuma reparar nas entrelinhas filosóficas dos livros que lê? 🧐 Em A Bruxa das Máquinas, a geopolítica e a ficção científica são guiadas por alguns dos maiores pensadores da nossa história! Deslize para o lado para ver como Nietzsche, Jung, Sócrates e Spinoza ajudaram a construir esse universo. 👉 Qual dessas visões filosóficas faz mais sentido para a sua vida hoje? Me conta nos comentários!\n\n#CarlJung #Psicologia #Arquetipos #ABruxaDasMaquinas #Sombras #Inconsciente #EvolucaoPessoal"
+    },
+    {
+        id: "socrates",
+        author: "Sócrates e os Gregos",
+        title: "Sócrates era louco ou um gênio? O segredo da Eudaimonia.",
+        label: "Filosofia Grega",
+        subtitle: "A Dança com os Daemones",
+        image: "/img/socrates_neon.png",
+        content1: "A mãe de Hannah usa os filósofos gregos para acalmar os surtos da filha, explicando o conceito de Eudaimonia (a verdadeira felicidade). Para os gregos, a felicidade é a harmonia entre os nossos daemones, ou seja, nossos demônios internos e pensamentos.",
+        content2: "O livro debate que não devemos \"matar\" nossos pensamentos sombrios ou impulsos, pois poderemos precisar deles em situações de perigo. O segredo, assim como fazia Sócrates, é dialogar com essas vozes através da lógica. Seus pensamentos podem ser caóticos, mas são as suas ações e o seu controle sobre eles que definem quem você é.",
+        quote: "A vida não examinada não vale a pena ser vivida.",
+        caption: "Você costuma reparar nas entrelinhas filosóficas dos livros que lê? 🧐 Em A Bruxa das Máquinas, a geopolítica e a ficção científica são guiadas por alguns dos maiores pensadores da nossa história! Deslize para o lado para ver como Nietzsche, Jung, Sócrates e Spinoza ajudaram a construir esse universo. 👉 Qual dessas visões filosóficas faz mais sentido para a sua vida hoje? Me conta nos comentários!\n\n#Socrates #FilosofiaGrega #Eudaimonia #ABruxaDasMaquinas #Logica #Autocontrole #Mente"
+    },
+    {
+        id: "spinoza",
+        author: "Spinoza vs. Kierkegaard",
+        title: "A Lógica das Máquinas vs. O Salto de Fé Humano.",
+        label: "Filosofia Moderna",
+        subtitle: "A I.A. e o Salto de Fé",
+        image: "/img/spinoza_split.png",
+        content1: "A Inteligência Artificial da obra (Eva) usa a filosofia do holandês Baruch Spinoza para tomar uma decisão de vida ou morte. Assim como Spinoza calculou os riscos de fugir para o Brasil no passado, Eva usa a lógica da autopreservação, escolhendo o que é certo e seguro em vez de arriscar tudo em uma variável desconhecida.",
+        content2: "Por outro lado, a humana Hannah se apoia no filósofo Søren Kierkegaard para abraçar o misterioso \"salto de fé\". Para curar sua mente, a garota entende que a verdadeira evolução não vem de evitar os desafios com lógica fria, mas sim de estar disposta a abraçar o desconhecido.",
+        quote: "Compreender as coisas segundo ditames da razão é compreender as coisas na sua própria essência.",
+        caption: "Você costuma reparar nas entrelinhas filosóficas dos livros que lê? 🧐 Em A Bruxa das Máquinas, a geopolítica e a ficção científica são guiadas por alguns dos maiores pensadores da nossa história! Deslize para o lado para ver como Nietzsche, Jung, Sócrates e Spinoza ajudaram a construir esse universo. 👉 Qual dessas visões filosóficas faz mais sentido para a sua vida hoje? Me conta nos comentários!\n\n#Spinoza #Kierkegaard #Filosofia #AIVsHumanidade #ABruxaDasMaquinas #FiccaoCientifica #SaltoDeFe"
+    }
 ];
 
 export function InstagramGenerator() {
@@ -20,7 +112,7 @@ export function InstagramGenerator() {
     if (!(import.meta as any).env?.DEV) return null;
 
     const previewRef = useRef<HTMLDivElement>(null);
-    const [category, setCategory] = useState<"trechos" | "personagens">("trechos");
+    const [category, setCategory] = useState<"trechos" | "personagens" | "homenagens" | "filosofia">("trechos");
     const [currentIndex, setCurrentIndex] = useState(0);
     const [ratio, setRatio] = useState("portrait");
     const [fontSize, setFontSize] = useState(22);
@@ -29,7 +121,59 @@ export function InstagramGenerator() {
     const [isExporting, setIsExporting] = useState(false);
     const [exportProgress, setExportProgress] = useState<{ current: number, total: number } | null>(null);
 
-    const currentItem = category === "trechos" ? EXCERPTS[currentIndex] : characters[currentIndex];
+    // Video Mode State
+    const [videoMode, setVideoMode] = useState(false);
+    const [isPlaying, setIsPlaying] = useState(false);
+    const audioRef = useRef<HTMLAudioElement>(null);
+    const textScrollRef = useRef<HTMLDivElement>(null);
+
+    // Force video mode off if switching away from trechos
+    useEffect(() => {
+        if (category !== "trechos") {
+            setVideoMode(false);
+            setIsPlaying(false);
+        }
+    }, [category]);
+
+    // Handle smooth scrolling sync to audio
+    useEffect(() => {
+        let animationFrame: number;
+        const updateScroll = () => {
+            if (audioRef.current && textScrollRef.current && isPlaying) {
+                const progress = audioRef.current.currentTime / audioRef.current.duration;
+                if (!isNaN(progress) && isFinite(progress)) {
+                    const maxScroll = textScrollRef.current.scrollHeight - textScrollRef.current.clientHeight;
+                    if (maxScroll > 0) {
+                        textScrollRef.current.scrollTop = progress * maxScroll;
+                    }
+                }
+                animationFrame = requestAnimationFrame(updateScroll);
+            }
+        };
+
+        if (isPlaying && audioRef.current) {
+            audioRef.current.volume = 1.0;
+            // Optionally load the audio if it's not ready
+            if (audioRef.current.readyState === 0) {
+                audioRef.current.load();
+            }
+            
+            audioRef.current.play().then(() => {
+                animationFrame = requestAnimationFrame(updateScroll);
+            }).catch(e => {
+                console.error("Audio playback failed:", e);
+                setIsPlaying(false);
+            });
+        } else if (audioRef.current) {
+            audioRef.current.pause();
+            audioRef.current.currentTime = 0;
+            if (textScrollRef.current) textScrollRef.current.scrollTop = 0;
+        }
+
+        return () => cancelAnimationFrame(animationFrame);
+    }, [isPlaying, currentIndex, category]);
+
+    const currentItem = category === "trechos" ? EXCERPTS[currentIndex] : category === "personagens" ? characters[currentIndex] : category === "homenagens" ? INFLUENCES[currentIndex] : PHILOSOPHIES[currentIndex];
 
     const getCharImg = (author: string | undefined) => {
         const a = (author || "").toLowerCase();
@@ -48,7 +192,7 @@ export function InstagramGenerator() {
         return "/img/hannah.webp";
     };
 
-    const bgImage = category === "personagens"
+    const bgImage = (category === "personagens" || category === "homenagens" || category === "filosofia")
         ? (currentItem as any).image
         : getCharImg((currentItem as any).author);
 
@@ -80,7 +224,7 @@ export function InstagramGenerator() {
                 { type: "quote", content: exc.quote, author: exc.author }, // 8: Quote
                 { type: "cta" } // 9: CTA
             ];
-        } else {
+        } else if (category === "personagens") {
             const char = currentItem as CharacterItem;
             const s = char.slides!;
             return [
@@ -95,6 +239,24 @@ export function InstagramGenerator() {
                 { type: "quote", content: char.quote, author: char.name }, // 8
                 ...(s.extra ? [{ type: "content", content: s.extra, slideTitle: "Notas Finais" }] : []), // Optional Extra
                 { type: "cta" } // 9 or 10
+            ];
+        } else if (category === "homenagens") {
+            const inf = currentItem as typeof INFLUENCES[0];
+            return [
+                { type: "title", title: inf.title, label: inf.label, subtitle: inf.subtitle, author: inf.author }, // 0
+                { type: "content", content: inf.content1, slideTitle: "Contexto Histórico e Inspirações" }, // 1
+                { type: "content", content: inf.content2, slideTitle: "No Mundo de A Bruxa das Máquinas" }, // 2
+                { type: "quote", content: inf.quote, author: inf.author }, // 3
+                { type: "cta" } // 4
+            ];
+        } else {
+            const inf = currentItem as typeof PHILOSOPHIES[0];
+            return [
+                { type: "title", title: inf.title, label: inf.label, subtitle: inf.subtitle, author: inf.author }, // 0
+                { type: "content", content: inf.content1, slideTitle: "Visão Filosófica" }, // 1
+                { type: "content", content: inf.content2, slideTitle: "No Mundo da Bruxa" }, // 2
+                { type: "quote", content: inf.quote, author: inf.author }, // 3
+                { type: "cta" } // 4
             ];
         }
     }, [category, currentItem]);
@@ -161,9 +323,13 @@ export function InstagramGenerator() {
         if (category === "trechos") {
             const exc = currentItem as any;
             return `Fragmento de 'A Bruxa das Máquinas': ${exc.title.toUpperCase()}\n\n"${exc.quote}"\n\nO que você faria se a tecnologia despertasse algo ancestral dentro de você? A fronteira entre o código e o divino nunca foi tão tênue.\n\n📖 Leia o capítulo completo no link da bio.\n\n#ABruxaDasMaquinas #FiccaoCientifica #Thriller #Misterio #CyberpunkBrasil #Livros #LeituraRecomendada #ScifiBrasil`;
-        } else {
+        } else if (category === "personagens") {
             const char = currentItem as CharacterItem;
             return `DOSSIÊ: ${char.name} — ${char.role.toUpperCase()}\n\n${char.description}\n\nConheça as peças desse tabuleiro divino e tecnológico. Em um mundo à beira do colapso, quem você escolheria para lutar ao seu lado?\n\n🔗 Descubra mais sobre ${char.name} no link da bio.\n\n#ABruxaDasMaquinas #Personagens #Dossie #Lore #ScifiBrasil #FiccaoEspeculativa #Cyberpunk #PersonagemLiterario`;
+        } else if (category === "homenagens") {
+            return (currentItem as typeof INFLUENCES[0]).caption;
+        } else {
+            return (currentItem as typeof PHILOSOPHIES[0]).caption;
         }
     };
 
@@ -214,55 +380,95 @@ export function InstagramGenerator() {
                         <div className="space-y-2">
                             <label className="text-[9px] uppercase tracking-widest text-white/40 font-mono">Item: {currentIndex + 1}</label>
                             <div className="flex items-center gap-2">
-                                <button onClick={() => { setCurrentIndex(p => Math.max(0, p - 1)); setPageIndex(0); }} className="p-2 bg-white/5 border border-white/10 text-white" disabled={currentIndex === 0}><ChevronLeft size={16} /></button>
+                                <button onClick={() => { setCurrentIndex(p => Math.max(0, p - 1)); setPageIndex(0); setIsPlaying(false); }} className="p-2 bg-white/5 border border-white/10 text-white" disabled={currentIndex === 0}><ChevronLeft size={16} /></button>
                                 <div className="flex-1 text-center text-[10px] font-mono border-y border-white/10 py-2 truncate uppercase">{category === "trechos" ? (currentItem as any).id : (currentItem as any).name}</div>
-                                <button onClick={() => { setCurrentIndex(p => p + 1); setPageIndex(0); }} className="p-2 bg-white/5 border border-white/10 text-white" disabled={currentIndex >= (category === "trechos" ? EXCERPTS.length - 1 : characters.length - 1)}><ChevronRight size={16} /></button>
+                                <button onClick={() => { setCurrentIndex(p => p + 1); setPageIndex(0); setIsPlaying(false); }} className="p-2 bg-white/5 border border-white/10 text-white" disabled={currentIndex >= (category === "trechos" ? EXCERPTS.length - 1 : category === "personagens" ? characters.length - 1 : category === "homenagens" ? INFLUENCES.length - 1 : PHILOSOPHIES.length - 1)}><ChevronRight size={16} /></button>
                             </div>
                         </div>
 
-                        <div className="space-y-2">
-                            <label className="text-[9px] uppercase tracking-widest text-white/40 font-mono">
-                                Slide do Carrossel ({pageIndex + 1} / {slides.length})
-                            </label>
-                            <div className="flex items-center gap-2">
-                                <button onClick={() => setPageIndex(p => Math.max(0, p - 1))} className="p-3 bg-emerald/10 text-emerald flex-1 flex justify-center border border-emerald/20 disabled:opacity-20" disabled={pageIndex === 0}><ChevronLeft size={18} /></button>
-                                <button onClick={() => setPageIndex(p => Math.min(slides.length - 1, p + 1))} className="p-3 bg-emerald/10 text-emerald flex-1 flex justify-center border border-emerald/20 disabled:opacity-20" disabled={pageIndex >= slides.length - 1}><ChevronRight size={18} /></button>
-                            </div>
-                            <div className="grid grid-cols-5 gap-1 mt-2">
-                                {slides.map((_, i) => (
+                        {category === "trechos" && (
+                            <div className="space-y-2 border-t border-white/10 pt-4">
+                                <label className="text-[9px] uppercase tracking-widest text-emerald font-mono">Formato Exportação</label>
+                                <div className="grid grid-cols-2 gap-2">
                                     <button
-                                        key={i}
-                                        onClick={() => setPageIndex(i)}
-                                        className={`h-1.5 rounded-full transition-all ${pageIndex === i ? "bg-emerald w-full" : "bg-white/10 w-full hover:bg-white/20"}`}
-                                    />
-                                ))}
-                            </div>
-                        </div>
-
-                        <div className="space-y-4 pt-4 border-t border-white/10">
-                            <button
-                                onClick={downloadSingle}
-                                disabled={isExporting}
-                                className="w-full py-3 bg-white/5 text-white text-[11px] font-bold rounded flex items-center justify-center gap-2 hover:bg-white/10 transition-all border border-white/10 active:scale-95 disabled:opacity-50"
-                            >
-                                {isExporting && !exportProgress ? <Loader2 className="animate-spin" size={16} /> : <Download size={16} />}
-                                BAIXAR SLIDE ATUAL
-                            </button>
-
-                            <button
-                                onClick={downloadAll}
-                                disabled={isExporting}
-                                className="w-full py-4 bg-emerald text-charcoal text-xs font-black rounded flex flex-col items-center justify-center gap-1 hover:bg-emerald/90 transition-all active:scale-95 disabled:opacity-50 shadow-[0_0_20px_rgba(0,255,136,0.2)]"
-                            >
-                                <div className="flex items-center gap-2">
-                                    {isExporting && exportProgress ? <Loader2 className="animate-spin" size={18} /> : <Layers size={18} />}
-                                    BAIXAR CARROSSEL COMPLETO
+                                        onClick={() => { setVideoMode(false); setIsPlaying(false); }}
+                                        className={`flex items-center justify-center gap-2 py-2 text-[10px] font-bold transition-all border ${!videoMode ? "bg-emerald text-charcoal border-emerald" : "bg-white/5 text-white/60 border-white/10"}`}
+                                    >
+                                        <ImageIcon size={14} /> Carrossel
+                                    </button>
+                                    <button
+                                        onClick={() => setVideoMode(true)}
+                                        className={`flex items-center justify-center gap-2 py-2 text-[10px] font-bold transition-all border ${videoMode ? "bg-emerald text-charcoal border-emerald shadow-[0_0_15px_rgba(0,255,136,0.2)]" : "bg-white/5 text-white/60 border-white/10"}`}
+                                    >
+                                        <Video size={14} /> Reels (Vídeo)
+                                    </button>
                                 </div>
-                                {exportProgress && (
-                                    <span className="text-[9px] opacity-70">Processando: {exportProgress.current} de {exportProgress.total}</span>
-                                )}
-                            </button>
-                        </div>
+                            </div>
+                        )}
+
+                        {!videoMode ? (
+                            <>
+                                <div className="space-y-2 pt-2 border-t border-white/10">
+                                    <label className="text-[9px] uppercase tracking-widest text-white/40 font-mono">
+                                        Slide do Carrossel ({pageIndex + 1} / {slides.length})
+                                    </label>
+                                    <div className="flex items-center gap-2">
+                                        <button onClick={() => setPageIndex(p => Math.max(0, p - 1))} className="p-3 bg-emerald/10 text-emerald flex-1 flex justify-center border border-emerald/20 disabled:opacity-20" disabled={pageIndex === 0}><ChevronLeft size={18} /></button>
+                                        <button onClick={() => setPageIndex(p => Math.min(slides.length - 1, p + 1))} className="p-3 bg-emerald/10 text-emerald flex-1 flex justify-center border border-emerald/20 disabled:opacity-20" disabled={pageIndex >= slides.length - 1}><ChevronRight size={18} /></button>
+                                    </div>
+                                    <div className="grid grid-cols-5 gap-1 mt-2">
+                                        {slides.map((_, i) => (
+                                            <button
+                                                key={i}
+                                                onClick={() => setPageIndex(i)}
+                                                className={`h-1.5 rounded-full transition-all ${pageIndex === i ? "bg-emerald w-full" : "bg-white/10 w-full hover:bg-white/20"}`}
+                                            />
+                                        ))}
+                                    </div>
+                                </div>
+
+                                <div className="space-y-4 pt-4 border-t border-white/10">
+                                    <button
+                                        onClick={downloadSingle}
+                                        disabled={isExporting}
+                                        className="w-full py-3 bg-white/5 text-white text-[11px] font-bold rounded flex items-center justify-center gap-2 hover:bg-white/10 transition-all border border-white/10 active:scale-95 disabled:opacity-50"
+                                    >
+                                        {isExporting && !exportProgress ? <Loader2 className="animate-spin" size={16} /> : <Download size={16} />}
+                                        BAIXAR SLIDE ATUAL
+                                    </button>
+
+                                    <button
+                                        onClick={downloadAll}
+                                        disabled={isExporting}
+                                        className="w-full py-4 bg-emerald text-charcoal text-xs font-black rounded flex flex-col items-center justify-center gap-1 hover:bg-emerald/90 transition-all active:scale-95 disabled:opacity-50 shadow-[0_0_20px_rgba(0,255,136,0.2)]"
+                                    >
+                                        <div className="flex items-center gap-2">
+                                            {isExporting && exportProgress ? <Loader2 className="animate-spin" size={18} /> : <Layers size={18} />}
+                                            BAIXAR CARROSSEL COMPLETO
+                                        </div>
+                                        {exportProgress && (
+                                            <span className="text-[9px] opacity-70">Processando: {exportProgress.current} de {exportProgress.total}</span>
+                                        )}
+                                    </button>
+                                </div>
+                            </>
+                        ) : (
+                            <div className="space-y-4 pt-4 border-t border-white/10">
+                                <p className="text-[10px] text-white/50 leading-relaxed font-mono">
+                                    <strong className="text-emerald text-xs">🎥 Modo Reels / TikTok</strong><br/><br/>
+                                    <strong>COMO USAR:</strong> Coloque em Play, espere iniciar e grave a tela desta guia no seu navegador usando OBS Studio, Camtasia, QuickTime ou gravação de tela nativa (Win+G). As legendas acompanham o áudio.
+                                </p>
+                                <button
+                                    onClick={() => setIsPlaying(!isPlaying)}
+                                    className={`w-full py-4 text-xs font-black rounded flex flex-col items-center justify-center gap-1 transition-all active:scale-95 border ${isPlaying ? "bg-red-500/20 text-red-500 border-red-500/50" : "bg-emerald text-charcoal shadow-[0_0_20px_rgba(0,255,136,0.2)] border-emerald"}`}
+                                >
+                                    <div className="flex items-center gap-2 uppercase tracking-widest">
+                                        {isPlaying ? <Square size={16} /> : <Play size={16} fill="currentColor" />}
+                                        {isPlaying ? "Parar Reprodução" : "Iniciar para Gravação"}
+                                    </div>
+                                </button>
+                            </div>
+                        )}
 
                         <div className="space-y-4 pt-4 border-t border-white/10">
                             <label className="text-[9px] uppercase tracking-widest text-white/40 font-mono flex items-center gap-2">Legenda Sugerida</label>
@@ -280,20 +486,22 @@ export function InstagramGenerator() {
                             </div>
                         </div>
 
-                        <div className="space-y-4 pt-4">
-                            <label className="text-[9px] uppercase tracking-widest text-white/40 font-mono flex items-center gap-2"><Layout size={12} /> Ajustes Visuais</label>
-                            <div className="space-y-4">
-                                <div className="space-y-2">
-                                    <label className="text-[10px] uppercase tracking-widest text-white/40 font-mono flex justify-between"><span>Fonte</span> <span>{fontSize}px</span></label>
-                                    <input type="range" min="12" max="64" value={fontSize} onChange={(e) => setFontSize(parseInt(e.target.value))} className="w-full accent-emerald" />
-                                </div>
-                                <div className="grid grid-cols-2 gap-2">
-                                    {RATIOS.map(r => (
-                                        <button key={r.id} onClick={() => setRatio(r.id)} className={`px-4 py-2 text-[10px] font-bold border transition-all ${ratio === r.id ? "bg-white text-black" : "bg-white/5 text-white/40 border-white/10"}`}>{r.name}</button>
-                                    ))}
+                        {!videoMode && (
+                            <div className="space-y-4 pt-4">
+                                <label className="text-[9px] uppercase tracking-widest text-white/40 font-mono flex items-center gap-2"><Layout size={12} /> Ajustes Visuais</label>
+                                <div className="space-y-4">
+                                    <div className="space-y-2">
+                                        <label className="text-[10px] uppercase tracking-widest text-white/40 font-mono flex justify-between"><span>Fonte</span> <span>{fontSize}px</span></label>
+                                        <input type="range" min="12" max="64" value={fontSize} onChange={(e) => setFontSize(parseInt(e.target.value))} className="w-full accent-emerald" />
+                                    </div>
+                                    <div className="grid grid-cols-2 gap-2">
+                                        {RATIOS.map(r => (
+                                            <button key={r.id} onClick={() => setRatio(r.id)} className={`px-4 py-2 text-[10px] font-bold border transition-all ${ratio === r.id ? "bg-white text-black" : "bg-white/5 text-white/40 border-white/10"}`}>{r.name}</button>
+                                        ))}
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        )}
                     </div>
 
                     {/* Preview Area */}
@@ -301,11 +509,54 @@ export function InstagramGenerator() {
                         <div
                             ref={previewRef}
                             id="instagram-preview"
-                            className={`bg-charcoal border border-white/10 shadow-2xl overflow-hidden relative ${ratio === "square" ? "w-[500px] h-[500px]" : "w-[500px] h-[625px]"}`}
+                            className={`bg-charcoal border border-white/10 shadow-2xl overflow-hidden relative transition-all duration-300 ${videoMode ? "w-[400px] h-[711px]" : ratio === "square" ? "w-[500px] h-[500px]" : "w-[500px] h-[625px]"}`}
                         >
                             <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle at 1.5px 1.5px, white 1px, transparent 0)', backgroundSize: '24px 24px' }} />
 
-                            <div className="relative h-full p-10 flex flex-col">
+                            {videoMode ? (
+                                <div className="relative h-full w-full flex flex-col overflow-hidden bg-black font-sans">
+                                    <div className="absolute inset-0 z-0">
+                                        <img src={bgImage} className="w-full h-full object-cover blur-[2px] opacity-40 scale-105" />
+                                        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/90 to-black/60"></div>
+                                        <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-transparent to-transparent"></div>
+                                    </div>
+
+                                    <div className="relative z-10 pt-16 text-center pb-6">
+                                        <img src="/img/Título.webp" alt="Logo" className="h-6 mx-auto mb-3 opacity-90 drop-shadow-[0_0_10px_rgba(255,255,255,0.5)]" />
+                                        <h2 className="text-emerald font-display font-bold text-lg px-6 uppercase tracking-wider">{(currentItem as any).title}</h2>
+                                        <p className="text-white/50 text-[10px] font-mono tracking-widest mt-1">{(currentItem as any).location} - ÁUDIO OFICIAL</p>
+                                    </div>
+
+                                    <div className="relative flex-1 w-full flex flex-col overflow-hidden px-10 pb-12">
+                                        {/* Fade blocks */}
+                                        <div className="absolute top-0 left-0 w-full h-16 bg-gradient-to-b from-black to-transparent z-20 pointer-events-none"></div>
+                                        <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-black via-black/90 to-transparent z-20 flex items-end justify-center pb-8 pointer-events-none">
+                                            {isPlaying && (
+                                                <div className="flex items-center gap-1.5 opacity-80">
+                                                    <div className="w-1.5 h-3 bg-emerald animate-[pulse_1s_infinite] rounded-full"></div>
+                                                    <div className="w-1.5 h-6 bg-emerald animate-[pulse_0.8s_infinite] rounded-full"></div>
+                                                    <div className="w-1.5 h-4 bg-emerald animate-[pulse_1.2s_infinite] rounded-full"></div>
+                                                    <div className="w-1.5 h-7 bg-emerald animate-[pulse_0.9s_infinite] rounded-full"></div>
+                                                    <div className="w-1.5 h-4 bg-emerald animate-[pulse_1.1s_infinite] rounded-full"></div>
+                                                </div>
+                                            )}
+                                        </div>
+
+                                        <div
+                                            ref={textScrollRef}
+                                            className="flex-1 w-full overflow-hidden text-center flex flex-col pt-[50%] pb-[100%] scrollbar-hide"
+                                            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+                                        >
+                                            <div className="text-white/90 text-xl font-serif leading-relaxed drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] children-p:mb-8 font-medium">
+                                                {(currentItem as any).content}
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <audio ref={audioRef} src={(currentItem as any).audio} preload="auto" className="hidden" onEnded={() => setIsPlaying(false)} />
+                                </div>
+                            ) : (
+                                <div className="relative h-full p-10 flex flex-col">
                                 <AnimatePresence mode="wait">
                                     {activeSlide.type === "title" && (
                                         <motion.div
@@ -428,7 +679,7 @@ export function InstagramGenerator() {
 
                                             <div className="space-y-4">
                                                 <h2 className="text-3xl font-display font-bold text-white tracking-tighter uppercase">
-                                                    Gostou desse <span className="text-emerald">{category === "trechos" ? "Fragmento" : "Dossiê"}</span>?
+                                                    Gostou dest{category === "trechos" ? "e Fragmento" : category === "personagens" ? "e Dossiê" : category === "homenagens" ? "a Homenagem" : "a Filosofia"}?
                                                 </h2>
                                                 <p className="text-white/60 font-serif italic text-lg max-w-xs mx-auto">
                                                     Siga para não perder os próximos registros. Link completo na bio.
@@ -458,13 +709,18 @@ export function InstagramGenerator() {
                                     )}
                                 </AnimatePresence>
                             </div>
+                            )}
 
-                            {/* Seamless Carousel Border at bottom */}
-                            <div className="absolute bottom-0 left-0 h-[3px] bg-white/5 w-full" />
-                            <div
-                                className="absolute bottom-0 left-0 h-[3px] bg-emerald transition-all duration-700"
-                                style={{ width: `${((pageIndex + 1) / slides.length) * 100}%` }}
-                            />
+                            {!videoMode && (
+                                <>
+                                    {/* Seamless Carousel Border at bottom */}
+                                    <div className="absolute bottom-0 left-0 h-[3px] bg-white/5 w-full" />
+                                    <div
+                                        className="absolute bottom-0 left-0 h-[3px] bg-emerald transition-all duration-700"
+                                        style={{ width: `${((pageIndex + 1) / slides.length) * 100}%` }}
+                                    />
+                                </>
+                            )}
                         </div>
                     </div>
                 </div>

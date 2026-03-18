@@ -1,7 +1,15 @@
-import { motion } from "motion/react";
-import { ShoppingCart, CreditCard, Zap, CheckCircle2, AlertCircle } from "lucide-react";
+import { useState } from "react";
+import { motion, AnimatePresence } from "motion/react";
+import { ShoppingCart, CreditCard, Zap, CheckCircle2, AlertCircle, X, ExternalLink } from "lucide-react";
 
 export function PricingSection() {
+    const [isAlertOpen, setIsAlertOpen] = useState(false);
+
+    const handleBuyClick = (e: React.MouseEvent) => {
+        e.preventDefault();
+        setIsAlertOpen(true);
+    };
+
     return (
         <section className="py-24 bg-charcoal relative overflow-hidden">
             {/* Background Decorative Element */}
@@ -70,14 +78,12 @@ export function PricingSection() {
                             ))}
                         </ul>
 
-                        <a
-                            href="https://www.amazon.com.br/Bruxa-das-M%C3%A1quinas-Cole%C3%A7%C3%A3o-Sofia/dp/B0DGDMC9Y9"
-                            target="_blank"
-                            rel="noopener noreferrer"
+                        <button
+                            onClick={handleBuyClick}
                             className="w-full py-4 bg-emerald text-charcoal font-black text-xs uppercase tracking-[0.2em] text-center hover:bg-white transition-all shadow-[0_0_20px_rgba(0,255,136,0.15)] hover:shadow-[0_0_30px_rgba(255,255,255,0.2)]"
                         >
                             Comprar Versão Física
-                        </a>
+                        </button>
                     </motion.div>
 
                     {/* Digital Book Card */}
@@ -118,14 +124,12 @@ export function PricingSection() {
                             ))}
                         </ul>
 
-                        <a
-                            href="https://www.amazon.com.br/Bruxa-das-M%C3%A1quinas-Cole%C3%A7%C3%A3o-Sofia/dp/B0DGDMC9Y9"
-                            target="_blank"
-                            rel="noopener noreferrer"
+                        <button
+                            onClick={handleBuyClick}
                             className="w-full py-4 border border-bronze/50 text-bronze font-black text-xs uppercase tracking-[0.2em] text-center hover:bg-bronze hover:text-charcoal transition-all"
                         >
                             Comprar E-Book
-                        </a>
+                        </button>
                     </motion.div>
                 </div>
 
@@ -136,6 +140,62 @@ export function PricingSection() {
                     </div>
                 </div>
             </div>
+
+            {/* Launch Alert Modal */}
+            <AnimatePresence>
+                {isAlertOpen && (
+                    <motion.div 
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        onClick={() => setIsAlertOpen(false)}
+                        className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4"
+                    >
+                        <motion.div
+                            initial={{ scale: 0.9, opacity: 0 }}
+                            animate={{ scale: 1, opacity: 1 }}
+                            exit={{ scale: 0.9, opacity: 0 }}
+                            onClick={(e) => e.stopPropagation()}
+                            className="bg-charcoal border border-emerald/50 rounded-lg p-8 max-w-md w-full relative shadow-[0_0_50px_rgba(0,255,136,0.2)]"
+                        >
+                            <button 
+                                onClick={() => setIsAlertOpen(false)}
+                                className="absolute top-4 right-4 text-white/50 hover:text-white transition-colors cursor-pointer"
+                            >
+                                <X size={20} />
+                            </button>
+                            
+                            <div className="flex justify-center mb-6">
+                                <div className="w-16 h-16 bg-emerald/10 rounded-full flex items-center justify-center text-emerald animate-pulse">
+                                    <AlertCircle size={32} />
+                                </div>
+                            </div>
+
+                            <h3 className="text-2xl font-display font-bold text-center text-white mb-4">
+                                Quase lá!
+                            </h3>
+                            
+                            <p className="text-white/70 text-center mb-6 leading-relaxed">
+                                O livro <strong className="text-emerald font-bold uppercase tracking-wider">A Bruxa das Máquinas</strong> <br/> só será lançado oficialmente no dia <strong className="text-white">10 de Abril de 2026</strong>.
+                            </p>
+
+                            <div className="bg-white/5 border border-white/10 rounded-lg p-5 mb-2 text-center">
+                                <p className="text-sm text-white/80 mb-6">
+                                    Entre na nossa comunidade do WhatsApp <br/> <strong className="text-emerald font-black uppercase text-xs tracking-widest leading-loose">"Amantes da Velha Sofia"</strong> <br/> e não perca a data de lançamento.
+                                </p>
+                                <a 
+                                    href="https://chat.whatsapp.com/EsvmoRXz5ExCBmLrJtSPsM" 
+                                    target="_blank" 
+                                    rel="noopener noreferrer"
+                                    className="inline-flex items-center justify-center w-full gap-2 py-4 bg-emerald text-charcoal font-black text-xs uppercase tracking-widest rounded-sm hover:bg-white transition-colors"
+                                >
+                                    Entrar na Comunidade <ExternalLink size={16} />
+                                </a>
+                            </div>
+                        </motion.div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </section>
     );
 }

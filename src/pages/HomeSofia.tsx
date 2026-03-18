@@ -181,15 +181,15 @@ export function HomeSofia() {
                                     className="aspect-[3/4.5] relative z-20"
                                 >
                                     <img
-                                        src="/img/dragao_dourado.webp"
-                                        alt="As Crônicas do Dragão Dourado - Livro I"
+                                        src="/img/As cronicas do dragão dourado.png"
+                                        alt="As Crônicas do Dragão Dourado"
                                         className="w-full h-full object-contain lg:grayscale group-hover:grayscale-0 drop-shadow-[0_20px_50px_rgba(34,211,238,0.15)] group-hover:drop-shadow-[0_30px_60px_rgba(34,211,238,0.3)] transition-all duration-700"
                                     />
                                 </motion.div>
                                 <div className="absolute inset-x-0 bottom-0 h-2 bg-cyan-900/20 blur-xl rounded-full scale-x-75 group-hover:scale-x-90 group-hover:bg-cyan-900/40 transition-all duration-500 opacity-50" />
                             </div>
                             <div className="mt-8">
-                                <h3 className="text-xl font-black text-white mb-2 uppercase italic group-hover:text-cyan-400 transition-colors leading-tight">Dragão Dourado - Livro I</h3>
+                                <h3 className="text-xl font-black text-white mb-2 uppercase italic group-hover:text-cyan-400 transition-colors leading-tight">As Crônicas do Dragão Dourado</h3>
                                 <p className="text-white/40 text-[13px] leading-relaxed mb-6 line-clamp-2 font-light italic">Uma aventura épica através de reinos invisíveis e batalhas internas pela alma da tecnologia.</p>
                                 <span className="text-white/20 text-[10px] font-black uppercase tracking-widest">Em Breve</span>
                             </div>
@@ -210,7 +210,7 @@ export function HomeSofia() {
                                     className="aspect-[3/4.5] relative z-20"
                                 >
                                     <img
-                                        src="/img/mestrado.webp"
+                                        src="/img/mestrado2.png"
                                         alt="Dissertação de Mestrado"
                                         className="w-full h-full object-contain lg:grayscale group-hover:grayscale-0 drop-shadow-[0_20px_50px_rgba(99,102,241,0.15)] group-hover:drop-shadow-[0_30px_60px_rgba(99,102,241,0.3)] transition-all duration-700"
                                     />
