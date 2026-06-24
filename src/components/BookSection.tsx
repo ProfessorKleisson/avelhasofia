@@ -53,13 +53,13 @@ export function BookSection() {
             </h2>
             <div className="space-y-6 text-white/70 text-base md:text-lg leading-relaxed text-justify">
               <p>
-                Em um mundo à beira da Terceira Guerra Mundial, a China lança um ataque surpresa aos Estados Unidos, espalhando o caos e a destruição por Nova York. Em meio a esse cenário apocalíptico, a embaixadora brasileira, Elora Borges, enfrenta a desesperadora missão de encontrar sua filha, Hannah, desaparecida no turbilhão da guerra. O que Elora não sabe é que Hannah guarda um segredo: ela abriga uma bruxa, a lendária deusa Ishtar dentro de si.
+                A Terceira Guerra Mundial começou. A China acaba de lançar um ataque devastador contra os Estados Unidos, reduzindo Nova York a cinzas e escombros. No epicentro do caos, a embaixadora brasileira Elora Borges tem apenas um objetivo: encontrar sua filha desaparecida, Hannah.
               </p>
               <p>
-                Enquanto Elora luta para encontrar Hannah, a jovem se vê no centro de uma batalha sobrenatural. Influenciada pela IA-27, ou Eva, e pela deusa Ishtar, que reside em seu subconsciente, Hannah precisa aprender a controlar seus poderes e enfrentar as forças chinesas que a perseguem.
+                Mas a garota não está indefesa. Guiada pela inteligência artificial avançada <i>Eva</i> e habitada pela divindade ancestral <i>Ishtar</i> em seu subconsciente, Hannah agora é o centro de uma guerra que mistura tecnologia letal e forças sobrenaturais incontroláveis.
               </p>
               <p>
-                "A Bruxa das Máquinas" é uma aventura épica que mistura ficção científica, fantasia e mitologia, criando um universo rico em ação, suspense e reflexões sobre a natureza humana e o papel da tecnologia em um mundo à beira do colapso.
+                <i>A Bruxa das Máquinas</i> é uma colisão visceral entre ficção científica e terror cósmico. Uma jornada implacável onde o limite entre o código de máquina e a alma humana é testado em um mundo à beira da aniquilação total.
               </p>
             </div>
 
