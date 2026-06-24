@@ -3,6 +3,7 @@ import { ChevronLeft, Landmark, GraduationCap } from "lucide-react";
 import { Footer } from "../../../../components/Footer";
 import { InfographicZoom } from "../../../../components/InfographicZoom";
 import { AnimatedGrid } from "../../../../components/AnimatedGrid";
+import { MarcarConcluidoButton } from "../../../../components/curso/MarcarConcluidoButton";
 
 export function TalesDeMiletoPage() {
     return (
@@ -169,6 +170,10 @@ Para Tales, <strong>"Tudo é água"</strong>.
 </section>` }}
                     />
                     
+                    <div id="tales-de-mileto-agua">
+                        <MarcarConcluidoButton topicId="tales-de-mileto-agua" areaColor="#d9b354" />
+                    </div>
+                    
                     {/* Infographic Section */}
                     <div className="mt-20 p-1 rounded-3xl bg-gradient-to-br from-violet-500/20 to-transparent border border-violet-500/10">
                         <div className="bg-[#0a0a0c]/80 rounded-3xl p-8">
@@ -185,6 +190,10 @@ Para Tales, <strong>"Tudo é água"</strong>.
                         </div>
                     </section>`} title="Síntese Visual" />
                         </div>
+                    </div>
+
+                    <div id="tales-de-mileto-ciencia">
+                        <MarcarConcluidoButton topicId="tales-de-mileto-ciencia" areaColor="#00d1ae" />
                     </div>
 
                 </article>

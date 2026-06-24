@@ -113,7 +113,7 @@ export function Hero() {
             className="inline-block px-3 py-1 border border-emerald/30 bg-emerald/5 rounded-full mb-4 text-shadow-strong"
           >
             <span className="text-[9px] uppercase tracking-[0.3em] text-emerald font-mono">
-              Lançamento físico e digital em Abril
+              LIVRO DISPONÍVEL NA AMAZON E MERCADO LIVRE
             </span>
           </motion.div>
 

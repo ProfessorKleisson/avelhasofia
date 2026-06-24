@@ -7,14 +7,16 @@ import { toPng } from "html-to-image";
 
 const RATIOS = [
     { id: "square", name: "Quadrado (1:1)", class: "aspect-square" },
-    { id: "portrait", name: "Retrato (4:5)", class: "aspect-[4/5]" }
+    { id: "portrait", name: "Retrato (4:5)", class: "aspect-[4/5]" },
+    { id: "3x4", name: "Retrato (3:4)", class: "aspect-[3/4]" }
 ];
 
 const CATEGORIES = [
     { id: "trechos", name: "Trechos", icon: <BookOpen size={14} /> },
     { id: "personagens", name: "Personagens", icon: <User size={14} /> },
     { id: "homenagens", name: "Homenagens", icon: <Sparkles size={14} /> },
-    { id: "filosofia", name: "Filosofia", icon: <Zap size={14} /> }
+    { id: "filosofia", name: "Filosofia", icon: <Zap size={14} /> },
+    { id: "divulgacao", name: "Divulgação", icon: <Layers size={14} /> }
 ];
 
 const INFLUENCES = [
@@ -107,12 +109,59 @@ const PHILOSOPHIES = [
     }
 ];
 
+const PROMOCIONAL = [
+    {
+        id: "combo",
+        name: "Post Completo",
+        title: "A Bruxa das Máquinas",
+        label: "Destaque Completo",
+        subtitle: "Ciência, Filosofia e Suspense",
+        image: "/img/Gemini_Generated_Image_kqbhh9kqbhh9kqbh.webp",
+        authorImage: "/img/autor2.webp",
+        content1: "1. Tensão Geopolítica Realista.\n2. IA Senciente e provocativa.\n3. Terror Cósmico (Lovecraft).\n4. Base Filosófica Profunda.",
+        content2: "O Autor: Garves K. B. é filósofo, mestre e criador por essência. Une o rigor acadêmico à imaginação indomável para criar mundos onde a lógica e o mito colidem em narrativas viscerais.",
+        pricing: {
+            amazon: "R$ 59,99 (Frete Grátis)",
+            mercadoLivre: "R$ 56,99 (Frete Grátis)",
+            kindle: "R$ 4,99",
+            kindleUnlimited: "Grátis"
+        },
+        quote: "Pode o ser humano incutir alma ao aço sem perder a própria pelo caminho?",
+        caption: "TUDO O QUE VOCÊ PRECISA SABER! 🤖📚\n\nDeslize para o lado para conhecer os segredos de A Bruxa das Máquinas: desde os motivos para ler até a mente por trás da obra. \n\nQual parte desse universo mais te fascina? Me conta nos comentários!\n\n🔗 Link oficial na bio.\n\n#ABruxaDasMaquinas #ScifiBrasil #Livros #Autor #Filosofia #Cyberpunk #Leitura"
+    },
+    {
+        id: "vendas",
+        // ... rest of existing items ...
+        name: "Por que ler?",
+        title: "Por que ler A Bruxa das Máquinas?",
+        label: "Destaque",
+        subtitle: "Sci-Fi, Filosofia e Suspense",
+        image: "/img/livros mock.webp",
+        content1: "Mergulhe em um xadrez geopolítico realista envolvendo ONU e ABIN. Sinta o terror cósmico inspirado em Lovecraft e a evolução de uma IA senciente além do código binário.",
+        content2: "Uma trama guiada por mentes como Nietzsche, Jung e Sócrates. Não é apenas ação, é uma reflexão profunda sobre o destino da nossa espécie em cada capítulo.",
+        quote: "O maior triunfo de um deus esquecido é fazer o homem acreditar que o escuro está vazio.",
+        caption: "Procurando sua próxima leitura favorita? 📚\n\nAqui estão os motivos para você mergulhar hoje mesmo no universo de A Bruxa das Máquinas. Qual desses mais te chama a atenção?\n\n💬 Comenta aqui embaixo!\n\n#Leitura #DicaDeLivro #ABruxaDasMaquinas #Scifi #Suspense #Filosofia"
+    },
+    {
+        id: "autor",
+        name: "O Autor",
+        title: "Garves K. B.",
+        label: "Sobre o Autor",
+        subtitle: "O Arquiteto de Mundos",
+        image: "/img/autor2.webp",
+        content1: "Garves K. B. é filósofo por formação e criador por essência. Une o rigor acadêmico à paixão pela ficção científica e fantasia, criando mundos onde a lógica e o mito colidem em narrativas viscerais.",
+        content2: "Escritor, professor, mestre em filosofia e game designer. Sua escrita é um reflexo da busca constante por entender a condição humana através da arte, da tecnologia e das sombras da mente.",
+        quote: "Compreender as coisas segundo ditames da razão é compreender as coisas na sua própria essência.",
+        caption: "Conheça a mente por trás do sistema. 🧠✍️\n\nGarves K. B. traz uma bagagem filosófica única para a ficção científica brasileira. Quer saber mais sobre o processo de criação?\n\n🔗 Visite o site oficial no link da bio!\n\n#Autor #LiteraturaBrasileira #GarvesKB #Filosofia #Escritor #Scifi"
+    }
+];
+
 export function InstagramGenerator() {
     // Only render in dev mode
     if (!(import.meta as any).env?.DEV) return null;
 
     const previewRef = useRef<HTMLDivElement>(null);
-    const [category, setCategory] = useState<"trechos" | "personagens" | "homenagens" | "filosofia">("trechos");
+    const [category, setCategory] = useState<"trechos" | "personagens" | "homenagens" | "filosofia" | "divulgacao">("trechos");
     const [currentIndex, setCurrentIndex] = useState(0);
     const [ratio, setRatio] = useState("portrait");
     const [fontSize, setFontSize] = useState(22);
@@ -173,7 +222,7 @@ export function InstagramGenerator() {
         return () => cancelAnimationFrame(animationFrame);
     }, [isPlaying, currentIndex, category]);
 
-    const currentItem = category === "trechos" ? EXCERPTS[currentIndex] : category === "personagens" ? characters[currentIndex] : category === "homenagens" ? INFLUENCES[currentIndex] : PHILOSOPHIES[currentIndex];
+    const currentItem = category === "trechos" ? EXCERPTS[currentIndex] : category === "personagens" ? characters[currentIndex] : category === "homenagens" ? INFLUENCES[currentIndex] : category === "filosofia" ? PHILOSOPHIES[currentIndex] : PROMOCIONAL[currentIndex];
 
     const getCharImg = (author: string | undefined) => {
         const a = (author || "").toLowerCase();
@@ -192,7 +241,7 @@ export function InstagramGenerator() {
         return "/img/hannah.webp";
     };
 
-    const bgImage = (category === "personagens" || category === "homenagens" || category === "filosofia")
+    const bgImage = (category === "personagens" || category === "homenagens" || category === "filosofia" || category === "divulgacao")
         ? (currentItem as any).image
         : getCharImg((currentItem as any).author);
 
@@ -249,13 +298,31 @@ export function InstagramGenerator() {
                 { type: "quote", content: inf.quote, author: inf.author }, // 3
                 { type: "cta" } // 4
             ];
-        } else {
+        } else if (category === "filosofia") {
             const inf = currentItem as typeof PHILOSOPHIES[0];
             return [
                 { type: "title", title: inf.title, label: inf.label, subtitle: inf.subtitle, author: inf.author }, // 0
                 { type: "content", content: inf.content1, slideTitle: "Visão Filosófica" }, // 1
                 { type: "content", content: inf.content2, slideTitle: "No Mundo da Bruxa" }, // 2
                 { type: "quote", content: inf.quote, author: inf.author }, // 3
+                { type: "cta" } // 4
+            ];
+        } else {
+            const inf = currentItem as typeof PROMOCIONAL[0];
+            if (inf.id === "combo") {
+                return [
+                    { type: "title", title: inf.title, label: inf.label, subtitle: inf.subtitle, author: "A Bruxa das Máquinas", fullScreen: true, image: inf.image }, // 0: Cover
+                    { type: "content", content: inf.content1, slideTitle: "Por que ler esta obra?", image: inf.image }, // 1: Por que ler (Thumbnail updated)
+                    { type: "content", content: inf.content2, slideTitle: "Conheça o Autor", image: inf.authorImage }, // 2: Autor
+                    { type: "quote", content: inf.quote, author: "Garves K. B." }, // 3: Frase
+                    { type: "cta", pricing: (inf as any).pricing } // 4: CTA
+                ];
+            }
+            return [
+                { type: "title", title: inf.title, label: inf.label, subtitle: inf.subtitle, author: inf.name }, // 0
+                { type: "content", content: inf.content1, slideTitle: "Informações" }, // 1
+                { type: "content", content: inf.content2, slideTitle: "Detalhes" }, // 2
+                { type: "quote", content: inf.quote, author: inf.name }, // 3
                 { type: "cta" } // 4
             ];
         }
@@ -328,8 +395,10 @@ export function InstagramGenerator() {
             return `DOSSIÊ: ${char.name} — ${char.role.toUpperCase()}\n\n${char.description}\n\nConheça as peças desse tabuleiro divino e tecnológico. Em um mundo à beira do colapso, quem você escolheria para lutar ao seu lado?\n\n🔗 Descubra mais sobre ${char.name} no link da bio.\n\n#ABruxaDasMaquinas #Personagens #Dossie #Lore #ScifiBrasil #FiccaoEspeculativa #Cyberpunk #PersonagemLiterario`;
         } else if (category === "homenagens") {
             return (currentItem as typeof INFLUENCES[0]).caption;
-        } else {
+        } else if (category === "filosofia") {
             return (currentItem as typeof PHILOSOPHIES[0]).caption;
+        } else {
+            return (currentItem as typeof PROMOCIONAL[0]).caption;
         }
     };
 
@@ -382,7 +451,7 @@ export function InstagramGenerator() {
                             <div className="flex items-center gap-2">
                                 <button onClick={() => { setCurrentIndex(p => Math.max(0, p - 1)); setPageIndex(0); setIsPlaying(false); }} className="p-2 bg-white/5 border border-white/10 text-white" disabled={currentIndex === 0}><ChevronLeft size={16} /></button>
                                 <div className="flex-1 text-center text-[10px] font-mono border-y border-white/10 py-2 truncate uppercase">{category === "trechos" ? (currentItem as any).id : (currentItem as any).name}</div>
-                                <button onClick={() => { setCurrentIndex(p => p + 1); setPageIndex(0); setIsPlaying(false); }} className="p-2 bg-white/5 border border-white/10 text-white" disabled={currentIndex >= (category === "trechos" ? EXCERPTS.length - 1 : category === "personagens" ? characters.length - 1 : category === "homenagens" ? INFLUENCES.length - 1 : PHILOSOPHIES.length - 1)}><ChevronRight size={16} /></button>
+                                <button onClick={() => { setCurrentIndex(p => p + 1); setPageIndex(0); setIsPlaying(false); }} className="p-2 bg-white/5 border border-white/10 text-white" disabled={currentIndex >= (category === "trechos" ? EXCERPTS.length - 1 : category === "personagens" ? characters.length - 1 : category === "homenagens" ? INFLUENCES.length - 1 : category === "filosofia" ? PHILOSOPHIES.length - 1 : PROMOCIONAL.length - 1)}><ChevronRight size={16} /></button>
                             </div>
                         </div>
 
@@ -509,7 +578,7 @@ export function InstagramGenerator() {
                         <div
                             ref={previewRef}
                             id="instagram-preview"
-                            className={`bg-charcoal border border-white/10 shadow-2xl overflow-hidden relative transition-all duration-300 ${videoMode ? "w-[400px] h-[711px]" : ratio === "square" ? "w-[500px] h-[500px]" : "w-[500px] h-[625px]"}`}
+                            className={`bg-charcoal border border-white/10 shadow-2xl overflow-hidden relative transition-all duration-300 ${videoMode ? "w-[400px] h-[711px]" : ratio === "square" ? "w-[500px] h-[500px]" : ratio === "3x4" ? "w-[500px] h-[667px]" : "w-[500px] h-[625px]"}`}
                         >
                             <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle at 1.5px 1.5px, white 1px, transparent 0)', backgroundSize: '24px 24px' }} />
 
@@ -567,77 +636,88 @@ export function InstagramGenerator() {
                                             transition={{ duration: isExporting ? 0 : 0.4 }}
                                             className="flex-1 flex flex-col justify-center text-center relative"
                                         >
-                                            <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 h-[120%] opacity-20 blur-xl grayscale pointer-events-none">
-                                                <img src={bgImage} className="w-full h-full object-cover scale-150" />
+                                            <div className={`absolute inset-0 ${activeSlide.fullScreen ? "opacity-100 z-50" : "opacity-20 blur-sm"} pointer-events-none`}>
+                                                <img src={activeSlide.fullScreen ? activeSlide.image : (category === "divulgacao" ? "/img/hero.webp" : bgImage)} className="w-full h-full object-cover" />
                                             </div>
-                                            <div className="relative z-10 flex flex-col items-center">
-                                                <img src="/img/Título.webp" alt="Logo" className="w-48 mb-6 drop-shadow-[0_0_15px_rgba(0,0,0,0.8)] opacity-90" />
-                                                <div className="px-3 py-1 border border-emerald/50 bg-emerald/10 rounded-full inline-flex items-center gap-2 mb-8">
-                                                    <Zap size={14} className="text-emerald" />
-                                                    <span className="text-[9px] uppercase tracking-[0.4em] font-bold text-emerald">{activeSlide.label}</span>
-                                                </div>
-                                                <div className="w-40 aspect-[3/4] border-2 border-emerald shadow-[0_0_40px_rgba(0,255,136,0.3)] overflow-hidden mb-8 translate-y-[-5px]">
-                                                    <img src={bgImage} className="w-full h-full object-cover" />
-                                                </div>
-                                                <h1 className="text-3xl font-display font-bold leading-tight mb-4 tracking-tighter uppercase px-4">{activeSlide.title}</h1>
-                                                <p className="text-emerald font-mono text-[10px] tracking-[0.3em] uppercase font-bold opacity-80">{activeSlide.subtitle}</p>
-                                            </div>
-                                            <div className="mt-auto flex justify-center gap-4 opacity-40 relative z-10">
-                                                <span className="font-mono text-[9px] tracking-widest uppercase">Protocolo A.B.D.M. // 2026 // SLIDE 01</span>
-                                            </div>
+                                            {!activeSlide.fullScreen && (
+                                                <>
+                                                    <div className="relative z-10 flex flex-col items-center">
+                                                        <img src="/img/Título.webp" alt="Logo" className="w-48 mb-6 drop-shadow-[0_0_15px_rgba(0,0,0,0.8)] opacity-90" />
+                                                        <div className="px-3 py-1 border border-emerald/50 bg-emerald/10 rounded-full inline-flex items-center gap-2 mb-8">
+                                                            <Zap size={14} className="text-emerald" />
+                                                            <span className="text-[9px] uppercase tracking-[0.4em] font-bold text-emerald">{activeSlide.label}</span>
+                                                        </div>
+                                                        <div className="w-40 aspect-[3/4] border-2 border-emerald shadow-[0_0_40px_rgba(0,255,136,0.3)] overflow-hidden mb-8 translate-y-[-5px]">
+                                                            <img src={bgImage} className="w-full h-full object-cover" />
+                                                        </div>
+                                                        <h1 className="text-3xl font-display font-bold leading-tight mb-4 tracking-tighter uppercase px-4">{activeSlide.title}</h1>
+                                                        <p className="text-emerald font-mono text-[10px] tracking-[0.3em] uppercase font-bold opacity-80">{activeSlide.subtitle}</p>
+                                                    </div>
+                                                    <div className="mt-auto flex justify-center gap-4 opacity-40 relative z-10">
+                                                        <span className="font-mono text-[9px] tracking-widest uppercase">Protocolo A.B.D.M. // 2026 // SLIDE 01</span>
+                                                    </div>
+                                                </>
+                                            )}
                                         </motion.div>
                                     )}
 
                                     {activeSlide.type === "content" && (
                                         <motion.div
                                             key={`content-${category}-${currentIndex}-${pageIndex}`}
-                                            initial={isExporting ? { opacity: 1 } : { opacity: 0 }}
-                                            animate={{ opacity: 1 }}
-                                            exit={isExporting ? { opacity: 1 } : { opacity: 0 }}
+                                            initial={isExporting ? { opacity: 1, x: 0 } : { opacity: 0, x: 20 }}
+                                            animate={{ opacity: 1, x: 0 }}
+                                            exit={isExporting ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
                                             transition={{ duration: isExporting ? 0 : 0.4 }}
                                             className="flex-1 flex flex-col"
                                         >
-                                            <div className="flex items-center gap-4 mb-8 border-b border-white/10 pb-4">
-                                                <div className="w-10 h-10 rounded-full border-2 border-emerald shadow-[0_0_10px_rgba(0,255,136,0.3)] flex-shrink-0 relative overflow-hidden">
-                                                    <img src={bgImage} className="w-full h-full object-cover" />
-                                                </div>
-                                                <div className="flex-1 font-mono uppercase tracking-widest text-emerald/60 text-[8px]">
-                                                    {activeSlide.slideTitle}
-                                                </div>
-                                                <div className="text-[9px] font-mono text-white/20 uppercase tracking-widest">
-                                                    Slide {pageIndex + 1}/{slides.length}
-                                                </div>
+                                            <div className={`absolute inset-0 ${activeSlide.fullScreen ? "opacity-100 z-50" : "opacity-10 blur-sm"} pointer-events-none`}>
+                                                <img src={activeSlide.fullScreen ? activeSlide.image : (category === "divulgacao" ? "/img/hero.webp" : bgImage)} className="w-full h-full object-cover" />
                                             </div>
-
-                                            <div
-                                                className="flex-1 text-white/95 font-serif leading-relaxed italic"
-                                                style={{ fontSize: `${fontSize}px` }}
-                                            >
-                                                {category === "trechos" ? (
-                                                    <div className="space-y-6">
-                                                        {activeSlide.content}
-                                                    </div>
-                                                ) : (
-                                                    <div className="border-l-2 border-emerald/30 pl-8 space-y-4">
-                                                        <div className="text-emerald font-mono text-[9px] uppercase tracking-[0.4em] mb-4">
-                                                            SISTEMA: {activeSlide.slideTitle}
+                                            {!activeSlide.fullScreen && (
+                                                <>
+                                                    <div className="flex items-center gap-4 mb-8 border-b border-white/10 pb-4 relative z-10">
+                                                        <div className="w-10 h-10 rounded-full border-2 border-emerald shadow-[0_0_10px_rgba(0,255,136,0.3)] flex-shrink-0 relative overflow-hidden">
+                                                            <img src={activeSlide.image || bgImage} className="w-full h-full object-cover" />
                                                         </div>
-                                                        <p className="leading-relaxed">
-                                                            {activeSlide.content}
-                                                        </p>
+                                                        <div className="flex-1 font-mono uppercase tracking-widest text-emerald/60 text-[8px]">
+                                                            {activeSlide.slideTitle}
+                                                        </div>
+                                                        <div className="text-[9px] font-mono text-white/20 uppercase tracking-widest">
+                                                            Slide {pageIndex + 1}/{slides.length}
+                                                        </div>
                                                     </div>
-                                                )}
-                                            </div>
 
-                                            <div className="mt-8 flex justify-between items-end border-t border-white/5 pt-4 opacity-50">
-                                                <div className="text-[8px] text-white/40 font-mono uppercase tracking-[0.2em]">
-                                                    {category === "trechos" ? (currentItem as any).time : `BIO-SIG: ${(currentItem as any).name}`}
-                                                </div>
-                                                <div className="flex items-center gap-2">
-                                                    <span className="text-[8px] text-white/30 uppercase font-mono">{pageIndex + 1}</span>
-                                                    <Instagram size={16} className="text-emerald/40" />
-                                                </div>
-                                            </div>
+                                                    <div
+                                                        className="flex-1 text-white/95 font-serif leading-relaxed italic relative z-10"
+                                                        style={{ fontSize: `${fontSize}px` }}
+                                                    >
+                                                        {category === "trechos" ? (
+                                                            <div className="space-y-6">
+                                                                {activeSlide.content}
+                                                            </div>
+                                                        ) : (
+                                                            <div className="border-l-2 border-emerald/30 pl-8 space-y-4">
+                                                                <div className="text-emerald font-mono text-[9px] uppercase tracking-[0.4em] mb-4">
+                                                                    SISTEMA: {activeSlide.slideTitle}
+                                                                </div>
+                                                                <p className="leading-relaxed">
+                                                                    {activeSlide.content}
+                                                                </p>
+                                                            </div>
+                                                        )}
+                                                    </div>
+
+                                                    <div className="mt-8 flex justify-between items-end border-t border-white/5 pt-4 opacity-50 relative z-10">
+                                                        <div className="text-[8px] text-white/40 font-mono uppercase tracking-[0.2em]">
+                                                            {category === "trechos" ? (currentItem as any).time : `BIO-SIG: ${(currentItem as any).name}`}
+                                                        </div>
+                                                        <div className="flex gap-2">
+                                                            <span className="text-[8px] text-white/30 uppercase font-mono">{pageIndex + 1}</span>
+                                                            <Instagram size={16} className="text-emerald/40" />
+                                                        </div>
+                                                    </div>
+                                                </>
+                                            )}
                                         </motion.div>
                                     )}
 
@@ -650,7 +730,10 @@ export function InstagramGenerator() {
                                             transition={{ duration: isExporting ? 0 : 0.4 }}
                                             className="flex-1 flex flex-col justify-center text-center px-6"
                                         >
-                                            <div className="text-6xl text-emerald/20 font-serif leading-none mb-2">“</div>
+                                            <div className="absolute inset-0 opacity-10 blur-sm pointer-events-none">
+                                                <img src={category === "divulgacao" ? "/img/hero.webp" : bgImage} className="w-full h-full object-cover scale-110" />
+                                            </div>
+                                            <div className="text-6xl text-emerald/20 font-serif leading-none mb-2 relative z-10">“</div>
                                             <h3 className="text-xl md:text-2xl font-display font-bold leading-snug text-white tracking-wide mb-8">
                                                 {activeSlide.content}
                                             </h3>
@@ -672,15 +755,42 @@ export function InstagramGenerator() {
                                             transition={{ duration: isExporting ? 0 : 0.4 }}
                                             className="flex-1 flex flex-col items-center justify-center text-center space-y-8"
                                         >
-                                            <div className="relative group cross-branding">
+                                            <div className="absolute inset-0 opacity-10 blur-sm pointer-events-none">
+                                                <img src={category === "divulgacao" ? "/img/hero.webp" : bgImage} className="w-full h-full object-cover scale-110" />
+                                            </div>
+                                            <div className="relative group cross-branding z-10">
                                                 <div className="absolute -inset-4 bg-emerald/20 rounded-full blur-xl group-hover:bg-emerald/30 transition-all animate-pulse" />
                                                 <img src="/img/Título.webp" alt="Logo Livro" className="w-32 relative z-10 drop-shadow-[0_0_20px_rgba(0,255,136,0.4)]" />
                                             </div>
 
-                                            <div className="space-y-4">
+                                            <div className="space-y-4 relative z-10">
                                                 <h2 className="text-3xl font-display font-bold text-white tracking-tighter uppercase">
-                                                    Gostou dest{category === "trechos" ? "e Fragmento" : category === "personagens" ? "e Dossiê" : category === "homenagens" ? "a Homenagem" : "a Filosofia"}?
+                                                    Link para compra do livro na bio
                                                 </h2>
+                                                
+                                                {activeSlide.pricing && (
+                                                    <div className="bg-black/40 border border-emerald/20 p-6 rounded space-y-4 backdrop-blur-md w-full max-w-sm mx-auto">
+                                                        <div className="flex justify-between items-center border-b border-white/5 pb-2">
+                                                            <span className="text-[10px] text-white/40 uppercase font-mono tracking-widest text-left">Amazon (Capa Dura)</span>
+                                                            <div className="flex flex-col items-end">
+                                                                <span className="text-emerald font-bold text-sm text-right">{activeSlide.pricing.amazon}</span>
+                                                            </div>
+                                                        </div>
+                                                        <div className="flex justify-between items-center border-b border-white/5 pb-2">
+                                                            <span className="text-[10px] text-white/40 uppercase font-mono tracking-widest text-left">Mercado Livre</span>
+                                                            <div className="flex flex-col items-end">
+                                                                <span className="text-emerald font-bold text-sm text-right">{activeSlide.pricing.mercadoLivre}</span>
+                                                            </div>
+                                                        </div>
+                                                        <div className="flex justify-between items-center border-b border-white/5 pb-2">
+                                                            <span className="text-[10px] text-white/40 uppercase font-mono tracking-widest text-left">Kindle / Unlimited</span>
+                                                            <div className="flex flex-col items-end">
+                                                                <span className="text-emerald font-bold text-sm text-right">{activeSlide.pricing.kindle} / {activeSlide.pricing.kindleUnlimited}</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                )}
+
                                                 <p className="text-white/60 font-serif italic text-lg max-w-xs mx-auto">
                                                     Siga para não perder os próximos registros. Link completo na bio.
                                                 </p>

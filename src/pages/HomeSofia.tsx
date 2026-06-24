@@ -100,19 +100,21 @@ export function HomeSofia() {
                         >
                             <Link to="/livros/bruxa-das-maquinas" className="block relative">
                                 <motion.div
-                                    whileHover={{ y: -15, scale: 1.02 }}
+                                    initial={{ scale: 1.45, y: -20 }}
+                                    animate={{ scale: 1.45, y: -20 }}
+                                    whileHover={{ y: -45, scale: 1.50 }}
                                     transition={{ type: "spring", stiffness: 300, damping: 20 }}
                                     className="aspect-[3/4.5] relative z-20"
                                 >
                                     <img
-                                        src="/img/livro mock.webp"
+                                        src="/img/livro-mock-bruxa.webp"
                                         alt="A Bruxa das Máquinas"
                                         className="w-full h-full object-contain drop-shadow-[0_20px_50px_rgba(34,211,238,0.15)] group-hover:drop-shadow-[0_30px_60px_rgba(34,211,238,0.3)] transition-all duration-500"
                                     />
                                 </motion.div>
                                 <div className="absolute inset-x-0 bottom-0 h-2 bg-cyan-900/20 blur-xl rounded-full scale-x-75 group-hover:scale-x-90 group-hover:bg-cyan-900/40 transition-all duration-500 opacity-50" />
                             </Link>
-                            <div className="mt-8">
+                            <div className="mt-16">
                                 <h3 className="text-xl font-black text-white mb-2 uppercase italic group-hover:text-cyan-400 transition-colors leading-tight">A Bruxa das Máquinas</h3>
                                 <p className="text-white/40 text-[13px] leading-relaxed mb-6 line-clamp-3 italic font-light">
                                     "Ishtar não é apenas um mito. Ela é a frequência que as máquinas finalmente aprenderam a sintonizar."
@@ -136,9 +138,9 @@ export function HomeSofia() {
                         >
                             <Link to="/livros/homens-deuses" className="block relative">
                                 <motion.div
-                                    initial={{ scale: 0.92 }}
-                                    animate={{ scale: 0.92 }}
-                                    whileHover={{ y: -15, scale: 0.95 }}
+                                    initial={{ scale: 1.15 }}
+                                    animate={{ scale: 1.15 }}
+                                    whileHover={{ y: -15, scale: 1.20 }}
                                     transition={{ type: "spring", stiffness: 300, damping: 20 }}
                                     className="aspect-[3/4.5] relative z-20"
                                 >
@@ -150,7 +152,7 @@ export function HomeSofia() {
                                 </motion.div>
                                 <div className="absolute inset-x-0 bottom-0 h-2 bg-cyan-900/20 blur-xl rounded-full scale-x-75 group-hover:scale-x-90 group-hover:bg-cyan-900/40 transition-all duration-500 opacity-50" />
                             </Link>
-                            <div className="mt-8">
+                            <div className="mt-16">
                                 <h3 className="text-xl font-black text-white mb-2 uppercase italic group-hover:text-cyan-400 transition-colors leading-tight">Os Homens-Deuses</h3>
                                 <p className="text-white/40 text-[13px] leading-relaxed mb-6 line-clamp-3 font-light italic">
                                     Charlie e onze outros estavam prestes a viver a festa mais incrível de suas vidas, mas nunca imaginaram que seria uma jornada épica...
@@ -174,21 +176,21 @@ export function HomeSofia() {
                         >
                             <div className="block relative">
                                 <motion.div
-                                    initial={{ scale: 1.08 }}
-                                    animate={{ scale: 1.08 }}
-                                    whileHover={{ y: -15, scale: 1.12 }}
+                                    initial={{ scale: 1.30 }}
+                                    animate={{ scale: 1.30 }}
+                                    whileHover={{ y: -15, scale: 1.35 }}
                                     transition={{ type: "spring", stiffness: 300, damping: 20 }}
                                     className="aspect-[3/4.5] relative z-20"
                                 >
                                     <img
-                                        src="/img/As cronicas do dragão dourado.png"
+                                        src="/img/As cronicas do dragão dourado.webp"
                                         alt="As Crônicas do Dragão Dourado"
                                         className="w-full h-full object-contain lg:grayscale group-hover:grayscale-0 drop-shadow-[0_20px_50px_rgba(34,211,238,0.15)] group-hover:drop-shadow-[0_30px_60px_rgba(34,211,238,0.3)] transition-all duration-700"
                                     />
                                 </motion.div>
                                 <div className="absolute inset-x-0 bottom-0 h-2 bg-cyan-900/20 blur-xl rounded-full scale-x-75 group-hover:scale-x-90 group-hover:bg-cyan-900/40 transition-all duration-500 opacity-50" />
                             </div>
-                            <div className="mt-8">
+                            <div className="mt-16">
                                 <h3 className="text-xl font-black text-white mb-2 uppercase italic group-hover:text-cyan-400 transition-colors leading-tight">As Crônicas do Dragão Dourado</h3>
                                 <p className="text-white/40 text-[13px] leading-relaxed mb-6 line-clamp-2 font-light italic">Uma aventura épica através de reinos invisíveis e batalhas internas pela alma da tecnologia.</p>
                                 <span className="text-white/20 text-[10px] font-black uppercase tracking-widest">Em Breve</span>
@@ -205,19 +207,21 @@ export function HomeSofia() {
                         >
                             <Link to="/livros/mestrado" className="block relative">
                                 <motion.div
-                                    whileHover={{ y: -15, scale: 1.05 }}
+                                    initial={{ scale: 1.40 }}
+                                    animate={{ scale: 1.40 }}
+                                    whileHover={{ y: -15, scale: 1.45 }}
                                     transition={{ type: "spring", stiffness: 300, damping: 20 }}
                                     className="aspect-[3/4.5] relative z-20"
                                 >
                                     <img
-                                        src="/img/mestrado2.png"
+                                        src="/img/mestrado2.webp"
                                         alt="Dissertação de Mestrado"
                                         className="w-full h-full object-contain lg:grayscale group-hover:grayscale-0 drop-shadow-[0_20px_50px_rgba(99,102,241,0.15)] group-hover:drop-shadow-[0_30px_60px_rgba(99,102,241,0.3)] transition-all duration-700"
                                     />
                                 </motion.div>
                                 <div className="absolute inset-x-0 bottom-0 h-2 bg-indigo-900/20 blur-xl rounded-full scale-x-75 group-hover:scale-x-90 group-hover:bg-indigo-900/40 transition-all duration-500 opacity-50" />
                             </Link>
-                            <div className="mt-8">
+                            <div className="mt-16">
                                 <h3 className="text-xl font-black text-white mb-2 uppercase italic group-hover:text-indigo-400 transition-colors leading-tight">Liberdade em Spinoza</h3>
                                 <p className="text-white/40 text-[13px] leading-relaxed mb-6 line-clamp-2 font-light italic">Dissertação de Mestrado (2021) sobre a autonomia e o determinismo na ética spinozana.</p>
                                 <Link

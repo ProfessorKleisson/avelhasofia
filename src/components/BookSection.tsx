@@ -12,13 +12,30 @@ export function BookSection() {
             viewport={{ once: true }}
             className="flex-1 relative"
           >
-            <div className="aspect-[4/3] w-full max-w-2xl mx-auto relative group">
-              <img
-                src="/img/livro mock.webp"
+            <div className="aspect-[4/3] w-full max-w-2xl mx-auto relative group flex justify-center items-center">
+              <motion.img
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ 
+                  opacity: 1, 
+                  scale: 1,
+                  y: [0, -20, 0]
+                }}
+                viewport={{ once: true }}
+                transition={{
+                  opacity: { duration: 0.8, ease: "easeOut" },
+                  scale: { duration: 0.8, ease: "easeOut" },
+                  y: {
+                    duration: 4,
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                  }
+                }}
+                src="/img/livro-mock-bruxa.webp"
                 alt="A Bruxa das Máquinas - Mockup"
-                className="w-full h-full object-contain drop-shadow-[0_0_30px_rgba(0,255,136,0.2)]"
+                className="w-full h-full object-contain drop-shadow-[0_20px_50px_rgba(0,255,136,0.15)]"
                 referrerPolicy="no-referrer"
               />
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[110%] h-[110%] border-t-2 border-l-2 border-emerald/20 -z-10 rounded-full blur-3xl opacity-20 animate-pulse" />
               <div className="absolute -top-4 -left-4 w-12 h-12 border-t-2 border-l-2 border-emerald opacity-50" />
               <div className="absolute -bottom-4 -right-4 w-12 h-12 border-b-2 border-r-2 border-emerald opacity-50" />
             </div>
@@ -51,7 +68,7 @@ export function BookSection() {
                 <ShoppingCart size={14} /> Onde Comprar
               </h3>
               <p className="text-white/60 text-sm italic">
-                Será vendido e entregue pela Amazon, Mercado Livre e Estante Virtual.
+                Vendido e entregue pela Amazon e Mercado Livre.
               </p>
             </div>
 

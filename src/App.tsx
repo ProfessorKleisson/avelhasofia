@@ -7,6 +7,7 @@ import { MestradoPage } from "./pages/Mestrado";
 import { ArtigoMichelangeloPage } from "./pages/ArtigoMichelangelo";
 import { SobrePage } from "./pages/Sobre";
 import { JogosDigitaisPage } from "./pages/JogosDigitais";
+import { AlocacaoPage } from "./pages/Alocacao";
 import { HeaderVelhaSofia } from "./components/HeaderVelhaSofia";
 import { useEffect } from "react";
 
@@ -27,6 +28,7 @@ import { EpicuroDeSamosPage } from "./pages/curso/filosofia/antiga/EpicuroDeSamo
 import { SênecaEpictetoEMarcoAurélioPage } from "./pages/curso/filosofia/antiga/SênecaEpictetoEMarcoAurélio";
 import { PlotinoDeRomaPage } from "./pages/curso/filosofia/antiga/PlotinoDeRoma";
 import { FilosofiaAntigaIndexPage } from "./pages/curso/filosofia/antiga/FilosofiaAntigaIndex";
+import { LinhaDoTempoPage } from "./pages/curso/LinhaDoTempo";
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -45,6 +47,7 @@ export default function App() {
 
         <Routes>
           <Route path="/" element={<HomeSofia />} />
+          <Route path="/apps/alocacao" element={<AlocacaoPage />} />
           <Route path="/livros/bruxa-das-maquinas" element={<BruxaDasMaquinasPage />} />
           <Route path="/jogos/diarquia" element={<DiarquiaPage />} />
           <Route path="/jogos/digitais" element={<JogosDigitaisPage />} />
@@ -54,6 +57,7 @@ export default function App() {
           <Route path="/sobre" element={<SobrePage />} />
 
           {/* Rotas de Filosofia Antiga */}
+          <Route path="/curso/linha-do-tempo" element={<LinhaDoTempoPage />} />
           <Route path="/curso/filosofia/antiga" element={<FilosofiaAntigaIndexPage />} />
           <Route path="/curso/filosofia/antiga/tales-de-mileto" element={<TalesDeMiletoPage />} />
           <Route path="/curso/filosofia/antiga/anaximandro-de-mileto" element={<AnaximandroDeMiletoPage />} />

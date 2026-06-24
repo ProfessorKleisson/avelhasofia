@@ -76,14 +76,21 @@ export function DiarquiaPage() {
                                         <a
                                             href="https://www.amazon.com.br/Diarquia-Filos%C3%B3fico-Hist%C3%B3rico-Racioc%C3%ADnio-Estrat%C3%A9gico/dp/B0DNNFZG5M"
                                             target="_blank"
-                                            className="inline-flex items-center justify-center gap-3 px-10 py-5 bg-charcoal text-[#FFB701] font-black uppercase text-sm tracking-widest rounded-xl hover:scale-105 transition-transform shadow-2xl"
+                                            className="inline-flex items-center justify-center gap-3 px-8 py-5 bg-charcoal text-[#FFB701] font-black uppercase text-xs tracking-widest rounded-xl hover:scale-105 transition-transform shadow-2xl"
                                         >
-                                            Comprar Agora <ChevronRight size={20} />
+                                            Amazon <ChevronRight size={20} />
+                                        </a>
+                                        <a
+                                            href="https://produto.mercadolivre.com.br/MLB-6594668470-diarquia-cardgame-a-velha-sofia-_JM"
+                                            target="_blank"
+                                            className="inline-flex items-center justify-center gap-3 px-8 py-5 bg-white text-charcoal border-2 border-charcoal font-black uppercase text-xs tracking-widest rounded-xl hover:bg-charcoal hover:text-[#FFB701] transition-all shadow-2xl"
+                                        >
+                                            Mercado Livre <ChevronRight size={20} />
                                         </a>
                                         <a
                                             href="https://diarquia-cardgame.onrender.com/"
                                             target="_blank"
-                                            className="inline-flex items-center justify-center gap-3 px-8 py-5 bg-transparent border-2 border-charcoal text-charcoal font-black uppercase text-sm tracking-widest rounded-xl hover:bg-charcoal hover:text-[#FFB701] transition-all shadow-xl"
+                                            className="inline-flex items-center justify-center gap-3 px-8 py-5 bg-transparent border-2 border-charcoal text-charcoal font-black uppercase text-xs tracking-widest rounded-xl hover:bg-charcoal hover:text-[#FFB701] transition-all shadow-xl"
                                         >
                                             Testar Digital
                                         </a>
@@ -372,13 +379,22 @@ export function DiarquiaPage() {
                         <div className="space-y-6">
                             <h2 className="text-5xl md:text-7xl font-black leading-none uppercase">Preparado para <br /> ser o soberano?</h2>
                             <p className="text-xl text-white/60 mb-8">O duelo filosófico definitivo espera por você.</p>
-                            <a
-                                href="https://www.amazon.com.br/Diarquia-Filos%C3%B3fico-Hist%C3%B3rico-Racioc%C3%ADnio-Estrat%C3%A9gico/dp/B0DNNFZG5M"
-                                target="_blank"
-                                className="inline-block px-12 py-6 bg-[#FFB701] text-charcoal font-black uppercase text-lg tracking-widest rounded-2xl hover:bg-white transition-colors shadow-2xl"
-                            >
-                                ADQUIRIR AGORA
-                            </a>
+                            <div className="flex flex-col sm:flex-row gap-6">
+                                <a
+                                    href="https://www.amazon.com.br/Diarquia-Filos%C3%B3fico-Hist%C3%B3rico-Racioc%C3%ADnio-Estrat%C3%A9gico/dp/B0DNNFZG5M"
+                                    target="_blank"
+                                    className="px-12 py-6 bg-[#FFB701] text-charcoal font-black uppercase text-lg tracking-widest rounded-2xl hover:bg-white transition-colors shadow-2xl"
+                                >
+                                    COMPRAR NA AMAZON
+                                </a>
+                                <a
+                                    href="https://produto.mercadolivre.com.br/MLB-6594668470-diarquia-cardgame-a-velha-sofia-_JM"
+                                    target="_blank"
+                                    className="px-12 py-6 bg-[#FFB701] text-charcoal border-2 border-charcoal font-black uppercase text-lg tracking-widest rounded-2xl hover:bg-white transition-colors shadow-2xl"
+                                >
+                                    MERCADO LIVRE
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -94,8 +94,20 @@ export function OsHomensDeusesPage() {
                         <div className="flex-1 relative">
                             <motion.div
                                 initial={{ opacity: 0, scale: 0.8 }}
-                                animate={{ opacity: 1, scale: 1 }}
-                                transition={{ duration: 1 }}
+                                animate={{ 
+                                    opacity: 1, 
+                                    scale: 1,
+                                    y: [0, -20, 0]
+                                }}
+                                transition={{ 
+                                    opacity: { duration: 0.8, ease: "easeOut" },
+                                    scale: { duration: 0.8, ease: "easeOut" },
+                                    y: {
+                                        duration: 4,
+                                        repeat: Infinity,
+                                        ease: "easeInOut"
+                                    }
+                                }}
                                 className="relative z-10"
                             >
                                 <img

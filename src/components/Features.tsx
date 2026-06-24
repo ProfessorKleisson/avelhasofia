@@ -20,10 +20,10 @@ const whyRead = [
 ];
 
 const targetAudience = [
-  { icon: <Swords size={16} />, text: "Leitores de Distopias e Guerras" },
-  { icon: <Rocket size={16} />, text: "Fãs de Ficção Científica e Fantasia" },
-  { icon: <BookOpen size={16} />, text: "Amantes de Aventura e Ação" },
-  { icon: <Landmark size={16} />, text: "Entusiastas por Mitologia" }
+  { icon: <Swords size={16} />, text: "Leitores de Distopias e Guerras", img: "/img/Gemini_Generated_Image_d3ci3ud3ci3ud3ci.webp" },
+  { icon: <Rocket size={16} />, text: "Fãs de Ficção Científica e Fantasia", img: "/img/Gemini_Generated_Image_uigakruigakruiga.webp" },
+  { icon: <BookOpen size={16} />, text: "Amantes de Aventura e Ação", img: "/img/Gemini_Generated_Image_sduwpzsduwpzsduw.webp" },
+  { icon: <Landmark size={16} />, text: "Entusiastas por Mitologia", img: "/img/Gemini_Generated_Image_bo91gcbo91gcbo91.webp" }
 ];
 
 export function Features() {
@@ -59,12 +59,29 @@ export function Features() {
 
         <div className="border-t border-white/5 pt-16">
           <h3 className="text-center text-xs uppercase tracking-[0.3em] text-white/40 mb-10">Este livro é destinado a:</h3>
-          <div className="flex flex-wrap justify-center gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 justify-items-center">
             {targetAudience.map((target, idx) => (
-              <div key={idx} className="flex items-center gap-3 px-6 py-3 bg-white/[0.03] border border-white/5 rounded-full text-sm font-mono text-bronze/80">
-                <span className="text-emerald">{target.icon}</span>
-                {target.text}
-              </div>
+              <motion.div 
+                key={idx}
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: idx * 0.1 }}
+                className="flex flex-col items-center gap-4 group text-center"
+              >
+                <div className="w-full aspect-square rounded-2xl overflow-hidden border border-white/10 group-hover:border-emerald/50 transition-all duration-500 shadow-2xl relative">
+                  <div className="absolute inset-0 bg-gradient-to-t from-charcoal/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10" />
+                  <img 
+                    src={target.img} 
+                    alt={target.text} 
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
+                  />
+                </div>
+                <div className="flex items-center gap-2 px-4 py-2 bg-white/[0.03] border border-white/5 rounded-full text-[10px] md:text-xs font-mono text-bronze/80 w-fit">
+                  <span className="text-emerald shrink-0">{target.icon}</span>
+                  <span className="line-clamp-1">{target.text}</span>
+                </div>
+              </motion.div>
             ))}
           </div>
         </div>

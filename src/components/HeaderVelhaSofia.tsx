@@ -28,6 +28,8 @@ export function HeaderVelhaSofia() {
                 return "#6366f1";
             case "/artigos/michelangelo":
                 return "#f59e0b";
+            case "/apps/alocacao":
+                return "#4f46e5";
             default:
                 return "#00D3F3";
         }
@@ -77,6 +79,7 @@ export function HeaderVelhaSofia() {
                             Filosofia <ChevronDown size={12} strokeWidth={3} />
                         </button>
                         <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-64 bg-black/95 backdrop-blur-2xl border border-violet-500/20 shadow-[0_10px_30px_rgba(0,0,0,0.5)] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all">
+                            <Link to="/curso/linha-do-tempo" className="block px-6 py-4 text-[10px] font-black uppercase tracking-widest hover:bg-violet-600 hover:text-white transition-all text-violet-400 border-b border-white/5 whitespace-nowrap italic">★ Linha do Tempo</Link>
                             <Link to="/curso/filosofia/antiga" className="block px-6 py-4 text-[10px] font-black uppercase tracking-widest hover:bg-violet-600 hover:text-white transition-all text-white/70 border-b border-white/5 whitespace-nowrap">1. Filosofia Antiga</Link>
                             <Link to="/curso/filosofia/medieval" className="block px-6 py-4 text-[10px] font-black uppercase tracking-widest hover:bg-violet-600 hover:text-white transition-all text-white/70 border-b border-white/5 whitespace-nowrap">2. Filosofia Medieval</Link>
                             <Link to="/curso/filosofia/moderna" className="block px-6 py-4 text-[10px] font-black uppercase tracking-widest hover:bg-violet-600 hover:text-white transition-all text-white/70 border-b border-white/5 whitespace-nowrap">3. Filosofia Moderna</Link>
@@ -94,6 +97,16 @@ export function HeaderVelhaSofia() {
                         <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-56 bg-black/95 backdrop-blur-2xl border border-cyan-500/20 shadow-[0_10px_30px_rgba(0,0,0,0.5)] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all">
                             <Link to="/jogos/digitais" className="block px-6 py-4 text-[10px] font-black uppercase tracking-widest hover:bg-cyan-500 hover:text-black transition-all text-white/70 border-b border-white/5">Jogos Digitais</Link>
                             <Link to="/jogos/diarquia" className="block px-6 py-4 text-[10px] font-black uppercase tracking-widest hover:bg-cyan-500 hover:text-black transition-all text-white/70">Diarquia (Cardgame)</Link>
+                        </div>
+                    </div>
+
+                    {/* Apps Dropdown */}
+                    <div className="relative group">
+                        <button className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-white/70 hover:text-indigo-500 transition-colors py-2">
+                            Apps <ChevronDown size={12} strokeWidth={3} />
+                        </button>
+                        <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-56 bg-black/95 backdrop-blur-2xl border border-indigo-500/20 shadow-[0_10px_30px_rgba(0,0,0,0.5)] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all">
+                            <Link to="/apps/alocacao" className="block px-6 py-4 text-[10px] font-black uppercase tracking-widest hover:bg-indigo-600 hover:text-white transition-all text-white/70 border-b border-white/5">aloca (Horários)</Link>
                         </div>
                     </div>
 
@@ -155,6 +168,7 @@ export function HeaderVelhaSofia() {
                                 <Link to="/livros/mestrado" className="block text-xl font-bold hover:text-[#6366f1] transition-colors">Liberdade em Spinoza</Link>
                                 <Link to="/jogos/digitais" className="block text-xl font-bold hover:text-cyan-400 transition-colors">Jogos Digitais</Link>
                                 <Link to="/jogos/diarquia" className="block text-xl font-bold hover:text-cyan-400 transition-colors">Diarquia Game</Link>
+                                <Link to="/apps/alocacao" className="block text-xl font-bold hover:text-indigo-400 transition-colors">aloca (Horários)</Link>
                                 <Link to="/artigos/michelangelo" className="block text-xl font-bold hover:text-amber-500 transition-colors">Artigo: Michelangelo</Link>
                                 <Link to="/sobre" className="block text-xl font-bold hover:text-cyan-400 transition-colors">Sobre o Autor</Link>
                                 {location.pathname === "/livros/bruxa-das-maquinas" && (
@@ -168,6 +182,7 @@ export function HeaderVelhaSofia() {
                         <div className="space-y-4">
                             <span className="text-[10px] font-black uppercase tracking-widest text-violet-500/60 transition-colors">Curso de Filosofia</span>
                             <div className="grid gap-3">
+                                <Link to="/curso/linha-do-tempo" className="block text-lg font-black italic text-violet-400 hover:text-violet-300 transition-colors">★ Linha do Tempo</Link>
                                 <Link to="/curso/filosofia/antiga" className="block text-lg font-bold hover:text-violet-400 transition-colors">1. Filosofia Antiga</Link>
                                 <Link to="/curso/filosofia/medieval" className="block text-lg font-bold hover:text-violet-400 transition-colors">2. Filosofia Medieval</Link>
                                 <Link to="/curso/filosofia/moderna" className="block text-lg font-bold hover:text-violet-400 transition-colors">3. Filosofia Moderna</Link>

@@ -26,6 +26,21 @@ const readers = [
         name: "Cristieli Moura",
         image: "/img/Cristieli Moura.webp",
         role: "Leitora"
+    },
+    {
+        name: "Carlinha",
+        image: "/img/carlinha.png",
+        role: "Leitora"
+    },
+    {
+        name: "Pietra Seráfico",
+        image: "/img/Pietra.png",
+        role: "Leitora"
+    },
+    {
+        name: "Lidiane",
+        image: "/img/Lidiane.png",
+        role: "Leitora"
     }
 ];
 

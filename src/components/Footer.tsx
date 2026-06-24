@@ -38,11 +38,13 @@ export function Footer() {
         return {
           color: "#00FF88",
           showPricing: true,
-          amazonUrl: "https://www.amazon.com.br/Bruxa-das-M%C3%A1quinas-Cole%C3%A7%C3%A3o-Sofia/dp/B0DGDMC9Y9",
+          amazonUrl: "https://www.amazon.com.br/dp/6501804051",
+          amazonDigitalUrl: "https://www.amazon.com.br/Bruxa-M%C3%A1quinas-Kleisson-Borges-Garves-ebook/dp/B0GQR811NV/",
+          mercadoLivreUrl: "https://produto.mercadolivre.com.br/MLB-6594644528-a-bruxa-das-maquinas-_JM",
           prices: [
-            { label: "Livro Físico", value: "R$ 49,99 + frete" },
-            { label: "Preço Original", value: "R$ 65,00", original: true },
-            { label: "Livro Digital", value: "R$ 18,99" }
+            { label: "Físico Amazon (Capa Dura)", value: "R$ 59,99 (Frete Grátis)" },
+            { label: "Físico Mercado Livre", value: "R$ 56,99 (Frete Grátis)" },
+            { label: "Livro Digital (Kindle)", value: "R$ 4,99" }
           ]
         };
       case "/jogos/diarquia":
@@ -114,12 +116,9 @@ export function Footer() {
                 <div className="space-y-6">
                   <div className="relative group overflow-hidden bg-white/[0.03] border border-white/10 rounded-xl p-6 pr-12 transition-all hover:border-[#DE863B]/50 hover:bg-white/[0.05]">
                     <div className="text-[10px] font-bold text-white/40 uppercase tracking-widest mb-2">Formato Kindle</div>
-                    <div className="flex items-center gap-3 mb-1">
-                      <span className="text-3xl font-black text-white italic">R$ 0,00</span>
-                      <div className="flex flex-col">
-                        <span className="text-[9px] font-black text-[#DE863B] italic leading-none uppercase">kindle</span>
-                        <span className="text-[9px] font-black text-[#DE863B] italic leading-none uppercase">unlimited</span>
-                      </div>
+                    <div className="flex items-center gap-4 mb-2">
+                      <span className="text-4xl font-black text-white italic">R$ 0,00</span>
+                      <img src="/img/kindle-unlimited.webp" alt="Kindle Unlimited" className="h-6 w-auto" />
                     </div>
                     <div className="text-[11px] text-white/60 font-medium">
                       ou <span className="text-[#DE863B] font-bold">R$ 10,00</span> para comprar
@@ -137,28 +136,16 @@ export function Footer() {
                 </div>
               ) : (
                 <div className="p-8 bg-white/[0.03] border border-white/10 space-y-6 relative overflow-hidden">
-                  {/* Promotion Tag for Bruxa das Máquinas */}
-                  {location.pathname === "/livros/bruxa-das-maquinas" && (
-                    <div className="absolute top-0 right-0 px-3 py-1 bg-emerald text-charcoal text-[9px] font-black uppercase tracking-widest">
-                      PROMOÇÃO
-                    </div>
-                  )}
-
-                  {config.prices?.map((price, idx) => {
-                    // Skip 'Preço Original' in the main loop if we're rendering it inline
-                    if (price.label === "Preço Original") return null;
-
-                    const originalPrice = config.prices?.find(p => p.original && p.label === "Preço Original");
-
+                  {config.prices?.map((price: any, idx) => {
                     return (
                       <div key={idx} className="space-y-2">
                         {idx > 0 && <div className="h-px bg-white/10 mb-6" />}
                         <div className="flex justify-between items-center gap-4">
                           <span className="text-white/60 text-[10px] uppercase font-black tracking-widest">{price.label}</span>
                           <div className="flex flex-col items-end gap-1">
-                            {price.label === "Livro Físico" && originalPrice && (
+                            {price.originalValue && (
                               <span className="text-white/20 line-through text-[11px] font-black tracking-tighter">
-                                {originalPrice.value}
+                                {price.originalValue}
                               </span>
                             )}
                             <span
@@ -172,28 +159,78 @@ export function Footer() {
                       </div>
                     );
                   })}
-                  <div className="pt-4">
-                    <a
-                      href={config.amazonUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-full py-4 text-[11px] font-black uppercase tracking-[0.2em] transition-all flex items-center justify-center gap-2"
-                      style={{
-                        backgroundColor: `${config.color}15`,
-                        border: `1px solid ${config.color}77`,
-                        color: config.color
-                      }}
-                      onMouseEnter={(e) => {
-                        e.currentTarget.style.backgroundColor = config.color;
-                        e.currentTarget.style.color = "#000";
-                      }}
-                      onMouseLeave={(e) => {
-                        e.currentTarget.style.backgroundColor = `${config.color}15`;
-                        e.currentTarget.style.color = config.color;
-                      }}
-                    >
-                      {location.pathname === "/livros/mestrado" ? "Acessar (PDF)" : "Comprar na Amazon"} <ExternalLink size={12} />
-                    </a>
+                  <div className="pt-4 flex flex-col gap-3">
+                    {config.amazonUrl && (
+                      <a
+                        href={config.amazonUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-full py-4 text-[11px] font-black uppercase tracking-[0.2em] transition-all flex items-center justify-center gap-2"
+                        style={{
+                          backgroundColor: `${config.color}15`,
+                          border: `1px solid ${config.color}77`,
+                          color: config.color
+                        }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.backgroundColor = config.color;
+                          e.currentTarget.style.color = "#000";
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.backgroundColor = `${config.color}15`;
+                          e.currentTarget.style.color = config.color;
+                        }}
+                      >
+                        {location.pathname === "/livros/mestrado" ? "Acessar (PDF)" : "Comprar na Amazon"} <ExternalLink size={12} />
+                      </a>
+                    )}
+                    
+                    {config.amazonDigitalUrl && (
+                      <a
+                        href={config.amazonDigitalUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-full py-4 text-[11px] font-black uppercase tracking-[0.2em] transition-all flex items-center justify-center gap-2"
+                        style={{
+                          backgroundColor: 'rgba(255,255,255,0.05)',
+                          border: '1px solid rgba(255,255,255,0.1)',
+                          color: '#fff'
+                        }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.backgroundColor = '#fff';
+                          e.currentTarget.style.color = '#000';
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.05)';
+                          e.currentTarget.style.color = '#fff';
+                        }}
+                      >
+                        Ler com Kindle Unlimited ou comprar <ExternalLink size={12} />
+                      </a>
+                    )}
+
+                    {(config as any).mercadoLivreUrl && (
+                      <a
+                        href={(config as any).mercadoLivreUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-full py-4 text-[11px] font-black uppercase tracking-[0.2em] transition-all flex items-center justify-center gap-2"
+                        style={{
+                          backgroundColor: 'rgba(255, 183, 1, 0.1)',
+                          border: '1px solid rgba(255, 183, 1, 0.4)',
+                          color: '#FFB701'
+                        }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.backgroundColor = '#FFB701';
+                          e.currentTarget.style.color = '#000';
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.backgroundColor = 'rgba(255, 183, 1, 0.1)';
+                          e.currentTarget.style.color = '#FFB701';
+                        }}
+                      >
+                        Comprar no Mercado Livre <ExternalLink size={12} />
+                      </a>
+                    )}
                   </div>
                 </div>
               )}
