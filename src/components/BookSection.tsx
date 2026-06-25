@@ -59,7 +59,10 @@ export function BookSection() {
                   />
                 </AnimatePresence>
               </motion.div>
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[110%] h-[110%] border-t-2 border-l-2 border-emerald/20 -z-10 rounded-full blur-3xl opacity-20 animate-pulse" />
+              {/* Glow Verde Mágico */}
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-4/5 h-4/5 bg-emerald/40 -z-10 rounded-full blur-[100px] animate-pulse mix-blend-screen" />
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-1/2 h-1/2 bg-green-500/30 -z-10 rounded-full blur-[60px] animate-pulse mix-blend-screen" style={{ animationDuration: '3s' }} />
+              
               <div className="absolute -top-4 -left-4 w-12 h-12 border-t-2 border-l-2 border-emerald opacity-50" />
               <div className="absolute -bottom-4 -right-4 w-12 h-12 border-b-2 border-r-2 border-emerald opacity-50" />
             </div>
