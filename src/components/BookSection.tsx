@@ -54,7 +54,7 @@ export function BookSection() {
                     transition={{ duration: 0.6 }}
                     src={images[currentImage]}
                     alt="A Bruxa das Máquinas - Mockup"
-                    className="absolute inset-0 w-full h-full object-contain drop-shadow-[0_20px_50px_rgba(0,255,136,0.15)]"
+                    className={`absolute inset-0 w-full h-full object-contain drop-shadow-[0_20px_50px_rgba(0,255,136,0.15)] ${currentImage === 1 ? 'scale-[1.4]' : ''}`}
                     referrerPolicy="no-referrer"
                   />
                 </AnimatePresence>
