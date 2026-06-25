@@ -1,7 +1,17 @@
-import { motion } from "motion/react";
+import { motion, AnimatePresence } from "motion/react";
 import { ShoppingCart } from "lucide-react";
+import { useState, useEffect } from "react";
 
 export function BookSection() {
+  const images = ["/img/livro-mock-bruxa.webp", "/img/livro-mock-bruxa-2.png"];
+  const [currentImage, setCurrentImage] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentImage((prev) => (prev === 0 ? 1 : 0));
+    }, 4000);
+    return () => clearInterval(timer);
+  }, []);
   return (
     <section id="sinopse" className="py-24 border-y border-white/5 bg-charcoal/50">
       <div className="container mx-auto px-6">
@@ -13,28 +23,42 @@ export function BookSection() {
             className="flex-1 relative"
           >
             <div className="aspect-[4/3] w-full max-w-2xl mx-auto relative group flex justify-center items-center">
-              <motion.img
-                initial={{ opacity: 0, scale: 0.8 }}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8, rotate: -15 }}
                 whileInView={{ 
                   opacity: 1, 
                   scale: 1,
+                  rotate: [0, -10, 8, -5, 3, 0],
                   y: [0, -20, 0]
                 }}
                 viewport={{ once: true }}
                 transition={{
                   opacity: { duration: 0.8, ease: "easeOut" },
                   scale: { duration: 0.8, ease: "easeOut" },
+                  rotate: { duration: 0.8, ease: "easeInOut" },
                   y: {
                     duration: 4,
                     repeat: Infinity,
-                    ease: "easeInOut"
+                    ease: "easeInOut",
+                    delay: 0.8
                   }
                 }}
-                src="/img/livro-mock-bruxa.webp"
-                alt="A Bruxa das Máquinas - Mockup"
-                className="w-full h-full object-contain drop-shadow-[0_20px_50px_rgba(0,255,136,0.15)]"
-                referrerPolicy="no-referrer"
-              />
+                className="w-full h-full relative"
+              >
+                <AnimatePresence mode="wait">
+                  <motion.img
+                    key={currentImage}
+                    initial={{ opacity: 0, filter: "blur(5px)" }}
+                    animate={{ opacity: 1, filter: "blur(0px)" }}
+                    exit={{ opacity: 0, filter: "blur(5px)" }}
+                    transition={{ duration: 0.6 }}
+                    src={images[currentImage]}
+                    alt="A Bruxa das Máquinas - Mockup"
+                    className="absolute inset-0 w-full h-full object-contain drop-shadow-[0_20px_50px_rgba(0,255,136,0.15)]"
+                    referrerPolicy="no-referrer"
+                  />
+                </AnimatePresence>
+              </motion.div>
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[110%] h-[110%] border-t-2 border-l-2 border-emerald/20 -z-10 rounded-full blur-3xl opacity-20 animate-pulse" />
               <div className="absolute -top-4 -left-4 w-12 h-12 border-t-2 border-l-2 border-emerald opacity-50" />
               <div className="absolute -bottom-4 -right-4 w-12 h-12 border-b-2 border-r-2 border-emerald opacity-50" />
