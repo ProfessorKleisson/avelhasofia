@@ -60,8 +60,16 @@ export function BookSection() {
                 </AnimatePresence>
               </motion.div>
               {/* Glow Verde Mágico */}
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-4/5 h-4/5 bg-emerald/40 -z-10 rounded-full blur-[100px] animate-pulse mix-blend-screen" />
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-1/2 h-1/2 bg-green-500/30 -z-10 rounded-full blur-[60px] animate-pulse mix-blend-screen" style={{ animationDuration: '3s' }} />
+              <motion.div 
+                animate={{ scale: [1, 1.1, 1], opacity: [0.2, 0.5, 0.2] }}
+                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3/5 h-3/5 bg-emerald/40 -z-10 rounded-full blur-[70px] mix-blend-screen pointer-events-none" 
+              />
+              <motion.div 
+                animate={{ scale: [1, 1.2, 1], opacity: [0.1, 0.4, 0.1] }}
+                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2/5 h-2/5 bg-green-400/40 -z-10 rounded-full blur-[40px] mix-blend-screen pointer-events-none" 
+              />
               
               <div className="absolute -top-4 -left-4 w-12 h-12 border-t-2 border-l-2 border-emerald opacity-50" />
               <div className="absolute -bottom-4 -right-4 w-12 h-12 border-b-2 border-r-2 border-emerald opacity-50" />
